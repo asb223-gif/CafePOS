@@ -25,15 +25,12 @@ button {
     cursor: pointer;
 }
 
-/* =========================
-   상단
-========================= */
-
 header {
     height: 82px;
     background: #20382c;
     color: white;
     padding: 0 25px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,7 +48,6 @@ header {
 .sales small {
     display: block;
     opacity: .7;
-    margin-bottom: 2px;
 }
 
 #todaySales {
@@ -61,7 +57,7 @@ header {
 
 
 /* =========================
-   3단 레이아웃
+   3단 화면
 ========================= */
 
 .main {
@@ -71,12 +67,11 @@ header {
     display: grid;
 
     grid-template-columns:
-        minmax(200px, .70fr)
-        minmax(310px, .95fr)
-        minmax(430px, 1.55fr);
+        minmax(190px, .65fr)
+        minmax(300px, .95fr)
+        minmax(480px, 1.7fr);
 
     gap: 14px;
-
     align-items: start;
 }
 
@@ -84,7 +79,9 @@ header {
     background: white;
     border-radius: 18px;
     padding: 17px;
-    box-shadow: 0 3px 14px rgba(0,0,0,.05);
+
+    box-shadow:
+        0 3px 14px rgba(0,0,0,.05);
 }
 
 .panel-title {
@@ -114,7 +111,6 @@ header {
     background: white;
 
     padding: 14px;
-
     text-align: left;
 
     transition: .08s;
@@ -146,6 +142,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     margin-bottom: 14px;
 }
 
@@ -168,6 +165,7 @@ header {
 .order-item {
     border: 2px solid #e8eae6;
     border-radius: 14px;
+
     padding: 13px;
     margin-bottom: 10px;
 }
@@ -175,7 +173,6 @@ header {
 .order-top {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
     gap: 10px;
 }
 
@@ -217,9 +214,12 @@ header {
 
 .temp-btn {
     height: 41px;
+
     border: 2px solid #e0e3df;
     border-radius: 9px;
+
     background: #f8f9f7;
+
     font-size: 14px;
     font-weight: 900;
 }
@@ -281,7 +281,6 @@ header {
     background: #f4f5f2;
 
     border-radius: 11px;
-
     padding: 7px;
 }
 
@@ -310,12 +309,14 @@ header {
     font-size: 22px;
     font-weight: 700;
 
-    box-shadow: 0 1px 5px rgba(0,0,0,.08);
+    box-shadow:
+        0 1px 5px rgba(0,0,0,.08);
 }
 
 .qty-number {
     min-width: 38px;
     text-align: center;
+
     font-size: 18px;
     font-weight: 900;
 }
@@ -344,6 +345,7 @@ header {
 .total-area {
     margin-top: 15px;
     padding-top: 15px;
+
     border-top: 2px solid #eee;
 }
 
@@ -362,7 +364,7 @@ header {
 
 .checkout {
     width: 100%;
-    height: 55px;
+    height: 58px;
 
     margin-top: 13px;
 
@@ -378,14 +380,16 @@ header {
 
 
 /* =========================
-   제조 현황
+   제조 현황 상단
 ========================= */
 
 .production-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     gap: 10px;
+
     margin-bottom: 14px;
 }
 
@@ -397,63 +401,135 @@ header {
 .pending-count {
     background: #fff0d8;
     color: #9b6417;
+
     border-radius: 20px;
-    padding: 6px 10px;
+
+    padding: 6px 11px;
+
     font-size: 12px;
     font-weight: 900;
 }
 
 
 /* =========================
-   음료 카드 3칸
+   팀별 주문 박스
+========================= */
+
+.team-order {
+    border: 2px solid #dedfdc;
+    border-radius: 16px;
+
+    margin-bottom: 15px;
+
+    overflow: hidden;
+
+    background: #fff;
+}
+
+.team-order.all-completed {
+    opacity: .62;
+}
+
+
+/* 주문번호 영역 */
+
+.team-header {
+    background: #293d32;
+    color: white;
+
+    padding: 11px 13px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.team-number {
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.team-info {
+    text-align: right;
+}
+
+.team-time {
+    font-size: 11px;
+    opacity: .75;
+}
+
+.team-price {
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+
+/* 모두 완료 */
+
+.team-order.all-completed .team-header {
+    background: #718078;
+}
+
+.team-complete-label {
+    margin-left: 7px;
+    font-size: 11px;
+    opacity: .85;
+}
+
+
+/* =========================
+   음료 카드
 ========================= */
 
 .drink-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 9px;
+
+    /* 무조건 가로 3칸 */
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap: 8px;
+
+    padding: 10px;
 }
 
 .drink-card {
     min-width: 0;
-    min-height: 125px;
+    min-height: 118px;
 
-    border: 2px solid #e5a340;
-    border-radius: 13px;
+    border: 2px solid #e4a13e;
+    border-radius: 12px;
 
-    background: #fff7e9;
+    background: #fff6e7;
 
-    padding: 11px 7px;
+    padding: 9px 5px;
 
     text-align: center;
-
-    cursor: pointer;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    transition: .12s;
+    cursor: pointer;
+
+    transition: .1s;
 }
 
 .drink-card:active {
-    transform: scale(.96);
+    transform: scale(.95);
 }
 
-
-/* 제조 완료 */
-
 .drink-card.completed {
-    background: #e3ebe6;
-    border-color: #789586;
-    opacity: .58;
+    background: #dfe9e3;
+    border-color: #769081;
 }
 
 .drink-name {
     width: 100%;
 
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 900;
 
     overflow-wrap: anywhere;
@@ -461,12 +537,13 @@ header {
 
 .drink-temp {
     margin-top: 5px;
+
     font-size: 12px;
     font-weight: 900;
 }
 
 .drink-discount {
-    margin-top: 6px;
+    margin-top: 5px;
 
     font-size: 9px;
     color: #777;
@@ -474,33 +551,42 @@ header {
     line-height: 1.3;
 }
 
-.drink-time {
-    margin-top: 6px;
-    font-size: 9px;
-    color: #999;
-}
-
 .drink-status {
-    margin-top: 7px;
+    margin-top: 8px;
 
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 900;
 
-    color: #9a6418;
+    color: #9b6417;
 }
 
 .drink-card.completed .drink-status {
-    color: #3f6650;
+    color: #365a46;
 }
 
 
 /* =========================
-   오른쪽 하단 버튼
+   팀 진행상황
+========================= */
+
+.team-progress {
+    padding: 0 11px 11px;
+
+    font-size: 10px;
+    color: #888;
+
+    text-align: right;
+}
+
+
+/* =========================
+   초기화
 ========================= */
 
 .production-bottom {
     margin-top: 15px;
     padding-top: 13px;
+
     border-top: 1px solid #eee;
 }
 
@@ -512,7 +598,6 @@ header {
     border-radius: 9px;
 
     background: #eee;
-
     color: #666;
 
     font-size: 11px;
@@ -565,7 +650,8 @@ header {
     }
 
     .menu-grid {
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns:
+            repeat(3,1fr);
     }
 
     .menu {
@@ -573,7 +659,8 @@ header {
     }
 
     .drink-grid {
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns:
+            repeat(3,1fr);
     }
 }
 
@@ -598,37 +685,33 @@ header {
     }
 
     .menu-grid {
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
     .drink-grid {
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns:
+            repeat(3,1fr);
     }
 
     .panel {
         padding: 13px;
     }
-
-    .drink-card {
-        min-height: 110px;
-        padding: 8px 4px;
-    }
-
-    .drink-name {
-        font-size: 12px;
-    }
 }
+
 </style>
 </head>
 
 
 <body>
 
+
 <header>
 
     <div class="logo">
         ☕ 카페 POS
     </div>
+
 
     <div class="sales">
 
@@ -645,6 +728,7 @@ header {
 </header>
 
 
+
 <div class="main">
 
 
@@ -657,6 +741,7 @@ header {
     <h2 class="panel-title">
         메뉴
     </h2>
+
 
     <div class="menu-grid">
 
@@ -753,6 +838,7 @@ header {
 
 <section class="panel">
 
+
     <div class="order-header">
 
         <h2>
@@ -768,6 +854,7 @@ header {
 
 
     <div class="total-area">
+
 
         <div class="total">
 
@@ -791,7 +878,9 @@ header {
 
         </button>
 
+
     </div>
+
 
 </section>
 
@@ -802,6 +891,7 @@ header {
 ========================= -->
 
 <section class="panel">
+
 
     <div class="production-header">
 
@@ -832,6 +922,7 @@ header {
         </button>
 
     </div>
+
 
 </section>
 
@@ -867,7 +958,7 @@ function todayKey() {
         d.getFullYear() +
         "-" +
         String(
-            d.getMonth() + 1
+            d.getMonth()+1
         ).padStart(2,"0") +
         "-" +
         String(
@@ -919,7 +1010,7 @@ function addItem(
 
     /*
     HOT 전용 메뉴
-    같은 일반 주문이면 수량 증가
+    같은 일반 메뉴가 있으면 수량 증가
     */
 
     if (!tempChoice) {
@@ -949,9 +1040,8 @@ function addItem(
 
 
     /*
-    ICE/HOT 선택 메뉴
-    아직 온도 미선택 항목이 있으면
-    수량 증가
+    커피
+    아직 온도 미선택이면 수량 증가
     */
 
     if (tempChoice) {
@@ -1050,7 +1140,7 @@ function setDiscount(
 
 
 /* =========================
-   같은 주문 합치기
+   같은 옵션 합치기
 ========================= */
 
 function mergeSameItems() {
@@ -1064,15 +1154,9 @@ function mergeSameItems() {
             const existing =
                 merged.find(
                     x =>
-
-                        x.name ===
-                        item.name &&
-
-                        x.temp ===
-                        item.temp &&
-
-                        x.discount ===
-                        item.discount
+                        x.name === item.name &&
+                        x.temp === item.temp &&
+                        x.discount === item.discount
                 );
 
 
@@ -1098,7 +1182,7 @@ function mergeSameItems() {
 
 
 /* =========================
-   할인율
+   할인
 ========================= */
 
 function discountRate(
@@ -1109,7 +1193,7 @@ function discountRate(
         discount === "senior"
     ) {
 
-        return 0.30;
+        return .30;
     }
 
 
@@ -1117,17 +1201,13 @@ function discountRate(
         discount === "family"
     ) {
 
-        return 0.10;
+        return .10;
     }
 
 
     return 0;
 }
 
-
-/* =========================
-   할인 이름
-========================= */
 
 function discountName(
     discount
@@ -1154,7 +1234,7 @@ function discountName(
 
 
 /* =========================
-   한 잔 가격
+   가격
 ========================= */
 
 function singlePrice(
@@ -1176,10 +1256,6 @@ function singlePrice(
 }
 
 
-/* =========================
-   항목 총 가격
-========================= */
-
 function itemTotal(
     item
 ) {
@@ -1192,7 +1268,7 @@ function itemTotal(
 
 
 /* =========================
-   수량 +
+   수량
 ========================= */
 
 function increaseQty(
@@ -1205,10 +1281,6 @@ function increaseQty(
     renderOrder();
 }
 
-
-/* =========================
-   수량 -
-========================= */
 
 function decreaseQty(
     index
@@ -1234,10 +1306,6 @@ function decreaseQty(
     renderOrder();
 }
 
-
-/* =========================
-   항목 삭제
-========================= */
 
 function deleteItem(
     index
@@ -1400,13 +1468,9 @@ function renderOrder() {
 
                     <div class="order-top">
 
-
                         <div class="order-name">
-
                             ${item.name}
-
                         </div>
-
 
                         <div class="order-price">
 
@@ -1416,7 +1480,6 @@ function renderOrder() {
                             }원
 
                         </div>
-
 
                     </div>
 
@@ -1449,9 +1512,7 @@ function renderOrder() {
                                 )
                             "
                         >
-
                             일반
-
                         </button>
 
 
@@ -1521,50 +1582,40 @@ function renderOrder() {
 
                             <button
                                 class="qty-btn"
-
                                 onclick="
                                     decreaseQty(
                                         ${index}
                                     )
                                 "
                             >
-
                                 −
-
                             </button>
 
 
                             <div class="qty-number">
-
                                 ${item.quantity}
-
                             </div>
 
 
                             <button
                                 class="qty-btn"
-
                                 onclick="
                                     increaseQty(
                                         ${index}
                                     )
                                 "
                             >
-
                                 +
-
                             </button>
 
 
                         </div>
-
 
                     </div>
 
 
                     <button
                         class="delete-btn"
-
                         onclick="
                             deleteItem(
                                 ${index}
@@ -1607,6 +1658,44 @@ function renderOrder() {
 
 
 /* =========================
+   오늘 주문번호 계산
+========================= */
+
+function getNextOrderNumber(
+    orders
+) {
+
+    let maxNumber = 0;
+
+
+    orders.forEach(
+        order => {
+
+            const number =
+                Number(
+                    order.orderNumber || 0
+                );
+
+
+            if (
+                number > maxNumber
+            ) {
+
+                maxNumber =
+                    number;
+            }
+
+        }
+    );
+
+
+    return (
+        maxNumber + 1
+    );
+}
+
+
+/* =========================
    주문 완료
 ========================= */
 
@@ -1623,8 +1712,6 @@ function checkout() {
         return;
     }
 
-
-    /* ICE/HOT 선택 확인 */
 
     const missing =
         currentOrder.find(
@@ -1704,12 +1791,18 @@ function checkout() {
         Date.now();
 
 
+    const orderNumber =
+        getNextOrderNumber(
+            db[key]
+        );
+
+
     const drinks = [];
 
 
     /*
-    수량이 3잔이면
-    제조 카드도 3개 생성
+    수량만큼
+    음료 카드 각각 생성
     */
 
     savedItems.forEach(
@@ -1761,6 +1854,9 @@ function checkout() {
         id:
             orderId,
 
+        orderNumber:
+            orderNumber,
+
         time:
             new Date()
             .toLocaleTimeString(
@@ -1798,13 +1894,15 @@ function checkout() {
 
 
     showToast(
-        "주문 접수 ✓"
+        "주문 #" +
+        orderNumber +
+        " 접수 ✓"
     );
 }
 
 
 /* =========================
-   음료 제조 상태 변경
+   음료 제조상태
 ========================= */
 
 function toggleDrink(
@@ -1847,11 +1945,6 @@ function toggleDrink(
         return;
     }
 
-
-    /*
-    클릭할 때마다
-    대기 ↔ 완료
-    */
 
     drink.completed =
         !drink.completed;
@@ -1904,8 +1997,8 @@ function updateToday() {
 
 
     /*
-    예전 버전으로 저장한
-    주문도 자동 변환
+    이전 버전 주문도
+    최대한 자동 변환
     */
 
     orders.forEach(
@@ -1917,6 +2010,16 @@ function updateToday() {
                 order.id =
                     Date.now() +
                     orderIndex;
+
+                changed =
+                    true;
+            }
+
+
+            if (!order.orderNumber) {
+
+                order.orderNumber =
+                    orderIndex + 1;
 
                 changed =
                     true;
@@ -2002,9 +2105,7 @@ function updateToday() {
     }
 
 
-    /* =====================
-       총매출
-    ===================== */
+    /* 오늘 총매출 */
 
     const sales =
         orders.reduce(
@@ -2027,12 +2128,10 @@ function updateToday() {
         "원";
 
 
-    /* =====================
-       음료 전부 모으기
-    ===================== */
+    /* 제조 대기 잔 수 */
 
-    let allDrinks =
-        [];
+    let pendingCount =
+        0;
 
 
     orders.forEach(
@@ -2040,47 +2139,30 @@ function updateToday() {
 
 
             if (
-                !Array.isArray(
+                Array.isArray(
                     order.drinks
                 )
             ) {
 
-                return;
+
+                order.drinks.forEach(
+                    drink => {
+
+
+                        if (
+                            !drink.completed
+                        ) {
+
+                            pendingCount++;
+                        }
+
+                    }
+                );
+
             }
-
-
-            order.drinks.forEach(
-                drink => {
-
-
-                    allDrinks.push({
-
-                        ...drink,
-
-                        orderId:
-                            order.id,
-
-                        orderTime:
-                            order.time
-
-                    });
-
-                }
-            );
 
         }
     );
-
-
-    /* =====================
-       제조 대기 수량
-    ===================== */
-
-    const pending =
-        allDrinks.filter(
-            drink =>
-                !drink.completed
-        ).length;
 
 
     document.getElementById(
@@ -2088,7 +2170,7 @@ function updateToday() {
     ).textContent =
 
         "대기 " +
-        pending +
+        pendingCount +
         "잔";
 
 
@@ -2099,13 +2181,13 @@ function updateToday() {
 
 
     if (
-        allDrinks.length === 0
+        orders.length === 0
     ) {
 
         production.innerHTML =
 
             '<div class="empty">' +
-            '제조 대기 음료가 없습니다' +
+            '제조 대기 주문이 없습니다' +
             '</div>';
 
         return;
@@ -2113,174 +2195,244 @@ function updateToday() {
 
 
     /*
-    대기 음료 먼저
-    완료 음료는 뒤로
+    최근 주문이 위에 표시
     */
 
-    allDrinks.sort(
-        (a,b) => {
+    const displayOrders =
+        [...orders]
+        .reverse();
 
 
-            if (
-                a.completed ===
-                b.completed
-            ) {
+    production.innerHTML =
 
-                return 0;
-            }
+        displayOrders
+        .map(
+            order => {
 
 
-            return (
-                a.completed
-                ? 1
-                : -1
-            );
-
-        }
-    );
+                const drinks =
+                    Array.isArray(
+                        order.drinks
+                    )
+                    ? order.drinks
+                    : [];
 
 
-    /* =====================
-       음료 카드 생성
-    ===================== */
-
-    production.innerHTML = `
-
-        <div class="drink-grid">
-
-            ${
-
-                allDrinks
-                .map(
-                    drink => {
+                const completedCount =
+                    drinks.filter(
+                        drink =>
+                            drink.completed
+                    ).length;
 
 
-                        let discountText =
-                            "";
+                const allCompleted =
+
+                    drinks.length > 0 &&
+                    completedCount ===
+                    drinks.length;
 
 
-                        if (
-                            drink.discount ===
-                            "senior"
-                        ) {
+                const drinkCards =
 
-                            discountText =
-                                "55세 이상 30%";
-                        }
+                    drinks
+                    .map(
+                        drink => {
 
 
-                        if (
-                            drink.discount ===
-                            "family"
-                        ) {
-
-                            discountText =
-                                "이웃가족 10%";
-                        }
+                            let discountText =
+                                "";
 
 
-                        let tempText =
-                            "";
+                            if (
+                                drink.discount ===
+                                "senior"
+                            ) {
+
+                                discountText =
+                                    "55세 이상 30%";
+                            }
 
 
-                        if (
-                            drink.temp ===
-                            "ICE"
-                        ) {
+                            if (
+                                drink.discount ===
+                                "family"
+                            ) {
 
-                            tempText =
-                                "🧊 ICE";
-
-                        } else {
-
-                            tempText =
-                                "🔥 HOT";
-                        }
+                                discountText =
+                                    "이웃가족 10%";
+                            }
 
 
-                        return `
+                            const tempText =
 
-                        <div
-                            class="
-                                drink-card
-                                ${
-                                    drink.completed
-                                    ? "completed"
-                                    : ""
-                                }
-                            "
+                                drink.temp ===
+                                "ICE"
 
-                            onclick="
-                                toggleDrink(
-                                    ${drink.orderId},
-                                    '${drink.id}'
-                                )
-                            "
-                        >
+                                ? "🧊 ICE"
+
+                                : "🔥 HOT";
 
 
-                            <div class="drink-name">
+                            return `
 
-                                ${drink.name}
+                            <div
+                                class="
+                                    drink-card
+                                    ${
+                                        drink.completed
+                                        ? "completed"
+                                        : ""
+                                    }
+                                "
 
-                            </div>
+                                onclick="
+                                    toggleDrink(
+                                        ${order.id},
+                                        '${drink.id}'
+                                    )
+                                "
+                            >
 
 
-                            <div class="drink-temp">
+                                <div class="drink-name">
 
-                                ${tempText}
-
-                            </div>
-
-
-                            ${
-                                discountText
-                                ?
-                                `
-
-                                <div class="drink-discount">
-
-                                    ${discountText}
+                                    ${drink.name}
 
                                 </div>
 
+
+                                <div class="drink-temp">
+
+                                    ${tempText}
+
+                                </div>
+
+
+                                ${
+                                    discountText
+                                    ?
+                                    `
+
+                                    <div class="drink-discount">
+
+                                        ${discountText}
+
+                                    </div>
+
+                                    `
+                                    :
+                                    ""
+                                }
+
+
+                                <div class="drink-status">
+
+                                    ${
+                                        drink.completed
+
+                                        ? "✓ 제조 완료"
+
+                                        : "● 제조 대기"
+                                    }
+
+                                </div>
+
+
+                            </div>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+
+                return `
+
+                <div
+                    class="
+                        team-order
+                        ${
+                            allCompleted
+                            ? "all-completed"
+                            : ""
+                        }
+                    "
+                >
+
+
+                    <div class="team-header">
+
+
+                        <div class="team-number">
+
+                            주문 #${order.orderNumber}
+
+                            ${
+                                allCompleted
+                                ?
+                                `
+                                <span class="team-complete-label">
+                                    ✓ 전체완료
+                                </span>
                                 `
                                 :
                                 ""
                             }
 
+                        </div>
 
-                            <div class="drink-time">
 
-                                ${drink.orderTime || ""}
+                        <div class="team-info">
+
+                            <div class="team-time">
+
+                                ${order.time || ""}
 
                             </div>
 
 
-                            <div class="drink-status">
+                            <div class="team-price">
 
                                 ${
-                                    drink.completed
-                                    ? "✓ 제조 완료"
-                                    : "● 제조 대기"
-                                }
+                                    Number(
+                                        order.total || 0
+                                    )
+                                    .toLocaleString()
+                                }원
 
                             </div>
-
 
                         </div>
 
-                        `;
 
-                    }
-                )
-                .join("")
+                    </div>
+
+
+                    <div class="drink-grid">
+
+                        ${drinkCards}
+
+                    </div>
+
+
+                    <div class="team-progress">
+
+                        제조 완료
+                        ${completedCount}
+                        /
+                        ${drinks.length}잔
+
+                    </div>
+
+
+                </div>
+
+                `;
 
             }
-
-        </div>
-
-    `;
+        )
+        .join("");
 }
 
 
@@ -2297,7 +2449,6 @@ function resetToday() {
 
 
     if (!answer) {
-
         return;
     }
 
@@ -2362,7 +2513,7 @@ function showToast(
                 );
 
             },
-            700
+            800
         );
 }
 
