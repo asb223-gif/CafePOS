@@ -17,26 +17,32 @@
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
-    background: #f3f4f1;
+    background: #f2f3ef;
     color: #222;
 }
 
 button {
     font-family: inherit;
+    cursor: pointer;
 }
 
-/* 상단 */
+/* =========================
+   상단
+========================= */
+
 header {
-    background: #21372c;
+    height: 82px;
+    background: #20382c;
     color: white;
-    padding: 20px 26px;
+    padding: 0 25px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    font-size: 26px;
+    font-size: 25px;
     font-weight: 900;
 }
 
@@ -51,426 +57,783 @@ header {
 }
 
 #todaySales {
-    font-size: 28px;
+    font-size: 27px;
     font-weight: 900;
 }
 
-/* 메인 */
+
+/* =========================
+   3단 레이아웃
+========================= */
+
 .main {
-    max-width: 1400px;
-    margin: auto;
-    padding: 18px;
+    width: 100%;
+    padding: 15px;
+
     display: grid;
-    grid-template-columns: 0.75fr 1.25fr;
-    gap: 18px;
+
+    /* 메뉴 / 현재주문 / 주문내역 */
+    grid-template-columns:
+        minmax(220px, 0.85fr)
+        minmax(330px, 1.05fr)
+        minmax(340px, 1.25fr);
+
+    gap: 14px;
+
+    align-items: start;
 }
 
 .panel {
     background: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 16px rgba(0,0,0,.05);
+    border-radius: 18px;
+    padding: 17px;
+
+    box-shadow:
+        0 3px 14px rgba(0,0,0,.05);
 }
 
-h2 {
-    margin: 0 0 16px;
-    font-size: 21px;
-}
-
-/* 메뉴 */
-.menu-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 11px;
-}
-
-.menu {
-    width: 100%;
-    border: 2px solid #e1e4df;
-    border-radius: 16px;
-    background: white;
-    padding: 18px;
-    text-align: left;
-    cursor: pointer;
-    min-height: 85px;
-}
-
-.menu:active {
-    transform: scale(.98);
-    background: #e4eee8;
-    border-color: #416b54;
-}
-
-.menu-name {
-    font-size: 19px;
-    font-weight: 900;
-}
-
-.menu-price {
-    color: #777;
-    font-size: 16px;
-    margin-top: 6px;
-}
-
-/* 현재 주문 */
-.empty {
-    color: #999;
-    text-align: center;
-    padding: 50px 10px;
-}
-
-.order-item {
-    border: 2px solid #e8eae6;
-    border-radius: 16px;
-    padding: 15px;
-    margin-bottom: 11px;
-}
-
-.order-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.order-name {
-    font-size: 18px;
-    font-weight: 900;
-}
-
-.order-price {
+.panel-title {
+    margin: 0 0 15px;
     font-size: 20px;
     font-weight: 900;
 }
 
-.hot-only {
-    font-size: 13px;
-    color: #a25340;
-    font-weight: 800;
+
+/* =========================
+   메뉴
+========================= */
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+}
+
+.menu {
+    width: 100%;
+    min-height: 78px;
+
+    border: 2px solid #e2e5e0;
+    border-radius: 14px;
+
+    background: white;
+
+    padding: 14px;
+
+    text-align: left;
+
+    transition: .08s;
+}
+
+.menu:active {
+    transform: scale(.97);
+    background: #e5eee8;
+    border-color: #426a55;
+}
+
+.menu-name {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.menu-price {
     margin-top: 5px;
+
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* =========================
+   현재 주문
+========================= */
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 14px;
+}
+
+.order-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+#orderCount {
+    color: #777;
+    font-size: 13px;
+}
+
+.empty {
+    color: #aaa;
+    text-align: center;
+
+    padding: 45px 10px;
+}
+
+.order-item {
+    border: 2px solid #e8eae6;
+
+    border-radius: 14px;
+
+    padding: 13px;
+
+    margin-bottom: 10px;
+}
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 10px;
+}
+
+.order-name {
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.order-price {
+    font-size: 18px;
+    font-weight: 900;
+
+    white-space: nowrap;
+}
+
+.hot-only {
+    margin-top: 4px;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    color: #a0523f;
 }
 
 .label {
-    font-size: 12px;
+    margin: 11px 0 5px;
+
     color: #888;
-    margin: 12px 0 6px;
+
+    font-size: 11px;
+    font-weight: 700;
 }
 
-/* ICE HOT */
+
+/* =========================
+   ICE / HOT
+========================= */
+
 .temp-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 7px;
+    gap: 6px;
 }
 
 .temp-btn {
-    height: 46px;
+    height: 41px;
+
     border: 2px solid #e0e3df;
-    border-radius: 10px;
+
+    border-radius: 9px;
+
     background: #f8f9f7;
-    font-weight: 800;
-    font-size: 15px;
-    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 900;
 }
 
 .temp-btn.ice.selected {
-    background: #3979a7;
-    border-color: #3979a7;
+    background: #397ba9;
+    border-color: #397ba9;
     color: white;
 }
 
 .temp-btn.hot.selected {
-    background: #a85844;
-    border-color: #a85844;
+    background: #a75a47;
+    border-color: #a75a47;
     color: white;
 }
 
-/* 할인 */
+
+/* =========================
+   할인
+========================= */
+
 .discount-buttons {
     display: grid;
-    grid-template-columns: .7fr 1.15fr 1.15fr;
-    gap: 7px;
+
+    grid-template-columns:
+        .75fr
+        1.15fr
+        1.15fr;
+
+    gap: 5px;
 }
 
 .discount-btn {
-    min-height: 50px;
+    min-height: 45px;
+
+    padding: 4px;
+
     border: 2px solid #e0e3df;
-    border-radius: 10px;
+
+    border-radius: 9px;
+
     background: #f8f9f7;
-    font-weight: 800;
-    font-size: 13px;
-    cursor: pointer;
+
+    font-size: 11px;
+    font-weight: 900;
 }
 
 .discount-btn.selected {
-    background: #294b39;
-    border-color: #294b39;
+    background: #294c39;
+    border-color: #294c39;
     color: white;
 }
 
-.delete-btn {
-    width: 100%;
+
+/* =========================
+   수량
+========================= */
+
+.quantity-area {
     margin-top: 11px;
-    border: 0;
-    border-radius: 9px;
-    background: #f5e7e7;
-    color: #9d3c3c;
-    height: 37px;
-    font-weight: 700;
-    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #f4f5f2;
+
+    border-radius: 11px;
+
+    padding: 7px;
 }
 
-/* 합계 */
+.quantity-label {
+    padding-left: 5px;
+
+    font-size: 12px;
+    color: #777;
+
+    font-weight: 700;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+}
+
+.qty-btn {
+    width: 38px;
+    height: 38px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: white;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    box-shadow: 0 1px 5px rgba(0,0,0,.08);
+}
+
+.qty-number {
+    min-width: 38px;
+
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: 900;
+}
+
+
+/* =========================
+   삭제
+========================= */
+
+.delete-btn {
+    width: 100%;
+    height: 34px;
+
+    margin-top: 8px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: #f6eaea;
+
+    color: #9a3e3e;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* =========================
+   결제
+========================= */
+
 .total-area {
+    margin-top: 15px;
+
+    padding-top: 15px;
+
     border-top: 2px solid #eee;
-    margin-top: 18px;
-    padding-top: 17px;
 }
 
 .total {
     display: flex;
     justify-content: space-between;
-    font-size: 24px;
+    align-items: center;
+
+    font-size: 21px;
     font-weight: 900;
+}
+
+#total {
+    font-size: 25px;
 }
 
 .checkout {
     width: 100%;
-    margin-top: 15px;
-    height: 58px;
+    height: 55px;
+
+    margin-top: 13px;
+
     border: 0;
-    border-radius: 14px;
-    background: #18271f;
+
+    border-radius: 13px;
+
+    background: #17271f;
+
     color: white;
-    font-size: 20px;
+
+    font-size: 18px;
     font-weight: 900;
-    cursor: pointer;
 }
 
-/* 주문 내역 */
-.history-wrap {
-    max-width: 1400px;
-    margin: 0 auto 30px;
-    padding: 0 18px;
-}
 
-.history-head {
+/* =========================
+   오늘 주문 내역
+========================= */
+
+.history-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+.history-header h2 {
+    margin: 0;
+
+    font-size: 20px;
 }
 
 .reset {
     border: 0;
-    border-radius: 9px;
+
+    border-radius: 8px;
+
     background: #eee;
-    padding: 9px 12px;
-    cursor: pointer;
+
+    padding: 8px 10px;
+
+    font-size: 11px;
+
+    white-space: nowrap;
 }
 
 .history-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 14px 0;
+    padding: 13px 0;
+
     border-bottom: 1px solid #eee;
 }
 
-.history-items {
-    color: #555;
-    font-size: 14px;
-    margin-top: 5px;
-    line-height: 1.6;
+.history-top {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 10px;
 }
 
-/* 알림 */
+.history-time {
+    font-weight: 900;
+}
+
+.history-total {
+    font-size: 17px;
+    font-weight: 900;
+
+    white-space: nowrap;
+}
+
+.history-items {
+    margin-top: 7px;
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   알림
+========================= */
+
 .toast {
     position: fixed;
+
     left: 50%;
     bottom: 25px;
+
     transform: translateX(-50%);
+
     background: #17261f;
+
     color: white;
-    border-radius: 30px;
+
     padding: 12px 22px;
+
+    border-radius: 30px;
+
     font-weight: 800;
+
     opacity: 0;
+
     pointer-events: none;
+
     transition: .15s;
+
+    z-index: 999;
 }
 
 .toast.show {
     opacity: 1;
 }
 
-/* 아이패드 세로 */
-@media(max-width: 850px) {
+
+/* =========================
+   아이패드 세로 / 작은 화면
+========================= */
+
+@media(max-width: 950px) {
+
     .main {
         grid-template-columns: 1fr;
-        padding: 12px;
+    }
+
+    .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .menu {
+        text-align: center;
+    }
+}
+
+
+/* 휴대폰 */
+
+@media(max-width: 600px) {
+
+    header {
+        height: 70px;
+        padding: 0 15px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    #todaySales {
+        font-size: 21px;
+    }
+
+    .main {
+        padding: 9px;
     }
 
     .menu-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .menu {
-        text-align: center;
-        min-height: 90px;
+    .panel {
         padding: 13px;
-    }
-
-    header {
-        padding: 17px;
-    }
-
-    .logo {
-        font-size: 21px;
-    }
-
-    #todaySales {
-        font-size: 23px;
-    }
-
-    .history-wrap {
-        padding: 0 12px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
 <header>
-    <div class="logo">☕ 카페 POS</div>
+
+    <div class="logo">
+        ☕ 카페 POS
+    </div>
 
     <div class="sales">
-        <small>오늘 총매출</small>
-        <div id="todaySales">0원</div>
+
+        <small>
+            오늘 총매출
+        </small>
+
+        <div id="todaySales">
+            0원
+        </div>
+
     </div>
+
 </header>
+
 
 <div class="main">
 
-    <!-- 메뉴 -->
-    <section class="panel">
 
-        <h2>메뉴</h2>
+<!-- =========================
+     왼쪽 메뉴
+========================= -->
 
-        <div class="menu-grid">
+<section class="panel">
 
-            <button class="menu" onclick="addItem('아메리카노', 4000, true)">
-                <div class="menu-name">☕ 아메리카노</div>
-                <div class="menu-price">4,000원</div>
-            </button>
+    <h2 class="panel-title">
+        메뉴
+    </h2>
 
-            <button class="menu" onclick="addItem('카페라떼', 5000, true)">
-                <div class="menu-name">🥛 카페라떼</div>
-                <div class="menu-price">5,000원</div>
-            </button>
+    <div class="menu-grid">
 
-            <button class="menu" onclick="addItem('한방차', 9000, false)">
-                <div class="menu-name">🍵 한방차</div>
-                <div class="menu-price">9,000원 · HOT</div>
-            </button>
+        <button
+            class="menu"
+            onclick="addItem('아메리카노',4000,true)">
 
-            <button class="menu" onclick="addItem('캐모마일', 5000, false)">
-                <div class="menu-name">🌼 캐모마일</div>
-                <div class="menu-price">5,000원 · HOT</div>
-            </button>
+            <div class="menu-name">
+                ☕ 아메리카노
+            </div>
 
-            <button class="menu" onclick="addItem('페퍼민트', 5000, false)">
-                <div class="menu-name">🌿 페퍼민트</div>
-                <div class="menu-price">5,000원 · HOT</div>
-            </button>
+            <div class="menu-price">
+                4,000원
+            </div>
 
-        </div>
-
-    </section>
+        </button>
 
 
-    <!-- 현재 주문 -->
-    <section class="panel">
+        <button
+            class="menu"
+            onclick="addItem('카페라떼',5000,true)">
+
+            <div class="menu-name">
+                🥛 카페라떼
+            </div>
+
+            <div class="menu-price">
+                5,000원
+            </div>
+
+        </button>
+
+
+        <button
+            class="menu"
+            onclick="addItem('한방차',9000,false)">
+
+            <div class="menu-name">
+                🍵 한방차
+            </div>
+
+            <div class="menu-price">
+                9,000원 · HOT
+            </div>
+
+        </button>
+
+
+        <button
+            class="menu"
+            onclick="addItem('캐모마일',5000,false)">
+
+            <div class="menu-name">
+                🌼 캐모마일
+            </div>
+
+            <div class="menu-price">
+                5,000원 · HOT
+            </div>
+
+        </button>
+
+
+        <button
+            class="menu"
+            onclick="addItem('페퍼민트',5000,false)">
+
+            <div class="menu-name">
+                🌿 페퍼민트
+            </div>
+
+            <div class="menu-price">
+                5,000원 · HOT
+            </div>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     가운데 현재 주문
+========================= -->
+
+<section class="panel">
+
+    <div class="order-header">
 
         <h2>
             현재 주문
-            <span id="orderCount" style="color:#888;font-size:14px;"></span>
         </h2>
 
-        <div id="orderList"></div>
+        <span id="orderCount"></span>
 
-        <div class="total-area">
+    </div>
 
-            <div class="total">
-                <span>결제금액</span>
-                <span id="total">0원</span>
-            </div>
 
-            <button class="checkout" onclick="checkout()">
-                주문 완료
-            </button>
+    <div id="orderList"></div>
+
+
+    <div class="total-area">
+
+        <div class="total">
+
+            <span>
+                결제금액
+            </span>
+
+            <span id="total">
+                0원
+            </span>
 
         </div>
 
-    </section>
+
+        <button
+            class="checkout"
+            onclick="checkout()">
+
+            주문 완료
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     오른쪽 오늘 주문 내역
+========================= -->
+
+<section class="panel">
+
+    <div class="history-header">
+
+        <h2>
+            오늘 주문 내역
+        </h2>
+
+        <button
+            class="reset"
+            onclick="resetToday()">
+
+            오늘 기록 초기화
+
+        </button>
+
+    </div>
+
+
+    <div id="historyList"></div>
+
+</section>
+
 
 </div>
 
 
-<!-- 오늘 주문 -->
-<div class="history-wrap">
-
-    <section class="panel">
-
-        <div class="history-head">
-
-            <h2>오늘 주문 내역</h2>
-
-            <button class="reset" onclick="resetToday()">
-                오늘 기록 초기화
-            </button>
-
-        </div>
-
-        <div id="historyList"></div>
-
-    </section>
-
+<div
+    class="toast"
+    id="toast">
 </div>
 
-<div class="toast" id="toast"></div>
 
 
 <script>
 
+/* =========================
+   현재 주문
+========================= */
+
 let currentOrder = [];
 
 
-/* 날짜 */
+/* =========================
+   날짜
+========================= */
 
 function todayKey() {
+
     const d = new Date();
 
     return (
-        d.getFullYear() + "-" +
-        String(d.getMonth() + 1).padStart(2, "0") + "-" +
-        String(d.getDate()).padStart(2, "0")
+        d.getFullYear() +
+        "-" +
+        String(d.getMonth() + 1).padStart(2,"0") +
+        "-" +
+        String(d.getDate()).padStart(2,"0")
     );
 }
 
 
-/* 저장 */
+/* =========================
+   데이터 저장
+========================= */
 
 function getDatabase() {
+
     try {
+
         return JSON.parse(
             localStorage.getItem("cafePOS") || "{}"
         );
+
     } catch {
+
         return {};
+
     }
 }
 
+
 function saveDatabase(db) {
+
     localStorage.setItem(
         "cafePOS",
         JSON.stringify(db)
@@ -478,43 +841,182 @@ function saveDatabase(db) {
 }
 
 
-/* 메뉴 클릭 */
+/* =========================
+   메뉴 추가
+========================= */
 
 function addItem(name, price, tempChoice) {
 
+    /*
+    HOT 전용 메뉴는
+    같은 메뉴 + 같은 할인이라면
+    바로 수량 증가
+    */
+
+    if (!tempChoice) {
+
+        const existing =
+            currentOrder.find(item =>
+                item.name === name &&
+                item.temp === "HOT" &&
+                item.discount === "normal"
+            );
+
+        if (existing) {
+
+            existing.quantity++;
+
+            renderOrder();
+
+            showToast(
+                name + " 수량 +1"
+            );
+
+            return;
+        }
+    }
+
+
+    /*
+    아메리카노/라떼는
+    ICE/HOT 선택 전이므로
+
+    아직 온도 선택 안 한
+    같은 메뉴가 있다면 수량 증가
+    */
+
+    if (tempChoice) {
+
+        const existing =
+            currentOrder.find(item =>
+                item.name === name &&
+                item.temp === "" &&
+                item.discount === "normal"
+            );
+
+        if (existing) {
+
+            existing.quantity++;
+
+            renderOrder();
+
+            showToast(
+                name + " 수량 +1"
+            );
+
+            return;
+        }
+    }
+
+
     currentOrder.push({
+
         name: name,
+
         basePrice: price,
+
         tempChoice: tempChoice,
 
-        // 커피는 아직 선택 전
-        // 차 종류는 HOT 자동 적용
-        temp: tempChoice ? "" : "HOT",
+        temp:
+            tempChoice
+            ? ""
+            : "HOT",
 
-        discount: "normal"
+        discount: "normal",
+
+        quantity: 1
+
     });
 
+
     renderOrder();
 
-    showToast(name + " 추가");
+    showToast(
+        name + " 추가"
+    );
 }
 
 
-/* 온도 */
+/* =========================
+   온도
+========================= */
 
-function setTemp(index, temp) {
+function setTemp(index,temp) {
+
     currentOrder[index].temp = temp;
+
+    mergeSameItems();
+
     renderOrder();
 }
 
 
-/* 할인 */
+/* =========================
+   할인
+========================= */
 
-function setDiscount(index, discount) {
-    currentOrder[index].discount = discount;
+function setDiscount(index,discount) {
+
+    currentOrder[index].discount =
+        discount;
+
+    mergeSameItems();
+
     renderOrder();
 }
 
+
+/* =========================
+   동일 주문 합치기
+========================= */
+
+function mergeSameItems() {
+
+    const merged = [];
+
+
+    currentOrder.forEach(item => {
+
+        const existing =
+            merged.find(x =>
+
+                x.name === item.name &&
+
+                x.basePrice ===
+                item.basePrice &&
+
+                x.temp ===
+                item.temp &&
+
+                x.discount ===
+                item.discount
+
+            );
+
+
+        if (existing) {
+
+            existing.quantity +=
+                item.quantity;
+
+        } else {
+
+            merged.push({
+                ...item
+            });
+
+        }
+
+    });
+
+
+    currentOrder = merged;
+}
+
+
+/* =========================
+   할인율
+========================= */
 
 function discountRate(discount) {
 
@@ -530,197 +1032,449 @@ function discountRate(discount) {
 }
 
 
+/* =========================
+   할인 이름
+========================= */
+
 function discountName(discount) {
 
     if (discount === "senior") {
-        return "55세 이상 30% 할인";
+        return "55세 이상 30%";
     }
 
     if (discount === "family") {
-        return "이웃가족 10% 할인";
+        return "이웃가족 10%";
     }
 
     return "일반";
 }
 
 
-function itemPrice(item) {
+/* =========================
+   한 잔 가격
+========================= */
+
+function singlePrice(item) {
 
     return Math.round(
+
         item.basePrice *
-        (1 - discountRate(item.discount))
+
+        (
+            1 -
+            discountRate(
+                item.discount
+            )
+        )
+
     );
 }
 
 
-/* 메뉴 삭제 */
+/* =========================
+   항목 전체 가격
+========================= */
 
-function deleteItem(index) {
-    currentOrder.splice(index, 1);
+function itemTotal(item) {
+
+    return (
+        singlePrice(item) *
+        item.quantity
+    );
+}
+
+
+/* =========================
+   수량 +
+========================= */
+
+function increaseQty(index) {
+
+    currentOrder[index].quantity++;
+
     renderOrder();
 }
 
 
-/* 현재 주문 그리기 */
+/* =========================
+   수량 -
+========================= */
+
+function decreaseQty(index) {
+
+    if (
+        currentOrder[index].quantity > 1
+    ) {
+
+        currentOrder[index].quantity--;
+
+    } else {
+
+        currentOrder.splice(
+            index,
+            1
+        );
+
+    }
+
+    renderOrder();
+}
+
+
+/* =========================
+   메뉴 삭제
+========================= */
+
+function deleteItem(index) {
+
+    currentOrder.splice(
+        index,
+        1
+    );
+
+    renderOrder();
+}
+
+
+/* =========================
+   현재 주문 화면
+========================= */
 
 function renderOrder() {
 
     const list =
-        document.getElementById("orderList");
+        document.getElementById(
+            "orderList"
+        );
 
-    const count =
-        document.getElementById("orderCount");
+
+    const totalQuantity =
+        currentOrder.reduce(
+            (sum,item) =>
+                sum + item.quantity,
+            0
+        );
 
 
-    count.textContent =
-        currentOrder.length
-        ? "(" + currentOrder.length + "잔)"
+    document.getElementById(
+        "orderCount"
+    ).textContent =
+
+        totalQuantity
+        ? totalQuantity + "잔"
         : "";
 
 
-    if (currentOrder.length === 0) {
+    if (
+        currentOrder.length === 0
+    ) {
 
         list.innerHTML =
-            '<div class="empty">메뉴를 눌러 주문을 추가해주세요</div>';
 
-        document.getElementById("total").textContent =
+            '<div class="empty">' +
+            '메뉴를 눌러주세요' +
+            '</div>';
+
+
+        document.getElementById(
+            "total"
+        ).textContent =
             "0원";
+
 
         return;
     }
 
 
     list.innerHTML =
-        currentOrder.map((item, index) => {
+
+        currentOrder
+        .map((item,index) => {
+
 
             let tempHTML = "";
+
 
             if (item.tempChoice) {
 
                 tempHTML = `
-                    <div class="label">ICE / HOT</div>
 
-                    <div class="temp-buttons">
+                <div class="label">
+                    ICE / HOT
+                </div>
 
-                        <button
-                            class="temp-btn ice ${item.temp === "ICE" ? "selected" : ""}"
-                            onclick="setTemp(${index}, 'ICE')">
-                            🧊 ICE
-                        </button>
+                <div class="temp-buttons">
 
-                        <button
-                            class="temp-btn hot ${item.temp === "HOT" ? "selected" : ""}"
-                            onclick="setTemp(${index}, 'HOT')">
-                            🔥 HOT
-                        </button>
+                    <button
+                        class="temp-btn ice
+                        ${item.temp === "ICE"
+                        ? "selected"
+                        : ""}"
 
-                    </div>
+                        onclick="
+                        setTemp(
+                            ${index},
+                            'ICE'
+                        )">
+
+                        🧊 ICE
+
+                    </button>
+
+
+                    <button
+                        class="temp-btn hot
+                        ${item.temp === "HOT"
+                        ? "selected"
+                        : ""}"
+
+                        onclick="
+                        setTemp(
+                            ${index},
+                            'HOT'
+                        )">
+
+                        🔥 HOT
+
+                    </button>
+
+                </div>
+
                 `;
 
             } else {
 
-                tempHTML =
-                    '<div class="hot-only">🔥 HOT 전용</div>';
+                tempHTML = `
+
+                <div class="hot-only">
+                    🔥 HOT 전용
+                </div>
+
+                `;
             }
 
 
             return `
-                <div class="order-item">
 
-                    <div class="order-head">
+            <div class="order-item">
 
-                        <div>
-                            <div class="order-name">
-                                ${index + 1}. ${item.name}
-                            </div>
-                            ${!item.tempChoice ? '<div class="hot-only">HOT</div>' : ''}
-                        </div>
 
-                        <div class="order-price">
-                            ${itemPrice(item).toLocaleString()}원
+                <div class="order-top">
+
+                    <div>
+
+                        <div class="order-name">
+                            ${item.name}
                         </div>
 
                     </div>
 
 
-                    ${tempHTML}
+                    <div class="order-price">
 
-
-                    <div class="label">할인</div>
-
-                    <div class="discount-buttons">
-
-                        <button
-                            class="discount-btn ${item.discount === "normal" ? "selected" : ""}"
-                            onclick="setDiscount(${index}, 'normal')">
-                            일반
-                        </button>
-
-                        <button
-                            class="discount-btn ${item.discount === "senior" ? "selected" : ""}"
-                            onclick="setDiscount(${index}, 'senior')">
-                            55세 이상<br>30%
-                        </button>
-
-                        <button
-                            class="discount-btn ${item.discount === "family" ? "selected" : ""}"
-                            onclick="setDiscount(${index}, 'family')">
-                            이웃가족<br>10%
-                        </button>
+                        ${itemTotal(item)
+                            .toLocaleString()}원
 
                     </div>
+
+                </div>
+
+
+                ${tempHTML}
+
+
+                <div class="label">
+                    할인
+                </div>
+
+
+                <div class="discount-buttons">
 
 
                     <button
-                        class="delete-btn"
-                        onclick="deleteItem(${index})">
-                        이 메뉴 삭제
+                        class="
+                        discount-btn
+                        ${item.discount === "normal"
+                        ? "selected"
+                        : ""}"
+
+                        onclick="
+                        setDiscount(
+                            ${index},
+                            'normal'
+                        )">
+
+                        일반
+
                     </button>
 
+
+                    <button
+                        class="
+                        discount-btn
+                        ${item.discount === "senior"
+                        ? "selected"
+                        : ""}"
+
+                        onclick="
+                        setDiscount(
+                            ${index},
+                            'senior'
+                        )">
+
+                        55세 이상<br>
+                        30%
+
+                    </button>
+
+
+                    <button
+                        class="
+                        discount-btn
+                        ${item.discount === "family"
+                        ? "selected"
+                        : ""}"
+
+                        onclick="
+                        setDiscount(
+                            ${index},
+                            'family'
+                        )">
+
+                        이웃가족<br>
+                        10%
+
+                    </button>
+
+
                 </div>
+
+
+                <div class="quantity-area">
+
+                    <div class="quantity-label">
+                        수량
+                    </div>
+
+
+                    <div class="quantity-control">
+
+                        <button
+                            class="qty-btn"
+                            onclick="
+                            decreaseQty(
+                                ${index}
+                            )">
+
+                            −
+
+                        </button>
+
+
+                        <div class="qty-number">
+
+                            ${item.quantity}
+
+                        </div>
+
+
+                        <button
+                            class="qty-btn"
+                            onclick="
+                            increaseQty(
+                                ${index}
+                            )">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="delete-btn"
+
+                    onclick="
+                    deleteItem(
+                        ${index}
+                    )">
+
+                    항목 삭제
+
+                </button>
+
+
+            </div>
+
             `;
 
-        }).join("");
+        })
+        .join("");
 
 
     const total =
         currentOrder.reduce(
-            (sum, item) =>
-                sum + itemPrice(item),
+
+            (sum,item) =>
+                sum +
+                itemTotal(item),
+
             0
+
         );
 
 
-    document.getElementById("total").textContent =
-        total.toLocaleString() + "원";
+    document.getElementById(
+        "total"
+    ).textContent =
+
+        total.toLocaleString() +
+        "원";
 }
 
 
-/* 주문 완료 */
+/* =========================
+   주문 완료
+========================= */
 
 function checkout() {
 
-    if (currentOrder.length === 0) {
-        alert("주문이 없습니다.");
+    if (
+        currentOrder.length === 0
+    ) {
+
+        alert(
+            "주문이 없습니다."
+        );
+
         return;
     }
 
 
-    // 아메리카노/라떼 ICE HOT 미선택 확인
+    /*
+    ICE/HOT 선택 확인
+    */
 
     const missing =
         currentOrder.find(
+
             item =>
                 item.tempChoice &&
                 !item.temp
+
         );
 
 
     if (missing) {
 
         alert(
+
             missing.name +
             "의 ICE / HOT을 선택해주세요."
+
         );
 
         return;
@@ -729,44 +1483,78 @@ function checkout() {
 
     const total =
         currentOrder.reduce(
-            (sum, item) =>
-                sum + itemPrice(item),
+
+            (sum,item) =>
+                sum +
+                itemTotal(item),
+
             0
+
         );
 
 
     const savedItems =
-        currentOrder.map(item => ({
-            name: item.name,
-            temp: item.temp,
-            discount: item.discount,
-            price: itemPrice(item)
-        }));
+        currentOrder.map(
+            item => ({
+
+                name:
+                    item.name,
+
+                temp:
+                    item.temp,
+
+                discount:
+                    item.discount,
+
+                quantity:
+                    item.quantity,
+
+                unitPrice:
+                    singlePrice(item),
+
+                price:
+                    itemTotal(item)
+
+            })
+        );
 
 
-    const db = getDatabase();
-    const key = todayKey();
+    const db =
+        getDatabase();
+
+
+    const key =
+        todayKey();
 
 
     if (!db[key]) {
+
         db[key] = [];
+
     }
 
 
     db[key].push({
 
         time:
-            new Date().toLocaleTimeString(
+
+            new Date()
+            .toLocaleTimeString(
                 "ko-KR",
                 {
-                    hour: "2-digit",
-                    minute: "2-digit"
+                    hour:
+                        "2-digit",
+
+                    minute:
+                        "2-digit"
                 }
             ),
 
-        total: total,
+        total:
+            total,
 
-        items: savedItems
+        items:
+            savedItems
 
     });
 
@@ -776,18 +1564,27 @@ function checkout() {
 
     currentOrder = [];
 
+
     renderOrder();
+
     updateToday();
 
-    showToast("주문 완료 ✓");
+
+    showToast(
+        "주문 완료 ✓"
+    );
 }
 
 
-/* 오늘 매출 */
+/* =========================
+   오늘 매출 / 주문내역
+========================= */
 
 function updateToday() {
 
-    const db = getDatabase();
+    const db =
+        getDatabase();
+
 
     const orders =
         db[todayKey()] || [];
@@ -795,53 +1592,99 @@ function updateToday() {
 
     const sales =
         orders.reduce(
-            (sum, order) =>
-                sum + order.total,
+
+            (sum,order) =>
+                sum +
+                order.total,
+
             0
+
         );
 
 
-    document.getElementById("todaySales").textContent =
-        sales.toLocaleString() + "원";
+    document.getElementById(
+        "todaySales"
+    ).textContent =
+
+        sales.toLocaleString() +
+        "원";
 
 
     const history =
-        document.getElementById("historyList");
+        document.getElementById(
+            "historyList"
+        );
 
 
-    if (orders.length === 0) {
+    if (
+        orders.length === 0
+    ) {
 
         history.innerHTML =
-            '<div class="empty">오늘 주문 기록이 없습니다</div>';
+
+            '<div class="empty">' +
+            '오늘 주문 기록이 없습니다' +
+            '</div>';
 
         return;
     }
 
 
     history.innerHTML =
+
         [...orders]
         .reverse()
         .map(order => {
 
+
             const items =
+
                 order.items
                 .map(item => {
 
+
+                    const qty =
+                        item.quantity || 1;
+
+
                     let text =
+
                         item.name +
-                        " " +
+                        " · " +
                         item.temp;
 
-                    if (item.discount !== "normal") {
+
+                    if (
+                        item.discount !==
+                        "normal"
+                    ) {
+
                         text +=
+
                             " · " +
-                            discountName(item.discount);
+                            discountName(
+                                item.discount
+                            );
                     }
 
+
+                    if (qty > 1) {
+
+                        text +=
+
+                            " · " +
+                            qty +
+                            "잔";
+                    }
+
+
                     text +=
+
                         " · " +
-                        item.price.toLocaleString() +
+                        item.price
+                        .toLocaleString() +
                         "원";
+
 
                     return text;
 
@@ -850,23 +1693,36 @@ function updateToday() {
 
 
             return `
-                <div class="history-row">
 
-                    <div>
+            <div class="history-row">
 
-                        <strong>${order.time}</strong>
+                <div class="history-top">
 
-                        <div class="history-items">
-                            ${items}
-                        </div>
+                    <div class="history-time">
+
+                        ${order.time}
 
                     </div>
 
-                    <strong>
-                        ${order.total.toLocaleString()}원
-                    </strong>
+
+                    <div class="history-total">
+
+                        ${order.total
+                            .toLocaleString()}원
+
+                    </div>
 
                 </div>
+
+
+                <div class="history-items">
+
+                    ${items}
+
+                </div>
+
+            </div>
+
             `;
 
         })
@@ -874,11 +1730,14 @@ function updateToday() {
 }
 
 
-/* 오늘 기록 삭제 */
+/* =========================
+   오늘 기록 초기화
+========================= */
 
 function resetToday() {
 
     const answer =
+
         confirm(
             "오늘 주문 기록과 총매출을 모두 삭제할까요?"
         );
@@ -889,9 +1748,14 @@ function resetToday() {
     }
 
 
-    const db = getDatabase();
+    const db =
+        getDatabase();
 
-    delete db[todayKey()];
+
+    delete db[
+        todayKey()
+    ];
+
 
     saveDatabase(db);
 
@@ -899,31 +1763,55 @@ function resetToday() {
 }
 
 
-/* 작은 알림 */
+/* =========================
+   알림
+========================= */
 
 let toastTimer;
+
 
 function showToast(message) {
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
 
-    toast.textContent = message;
 
-    toast.classList.add("show");
+    toast.textContent =
+        message;
 
-    clearTimeout(toastTimer);
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
 
     toastTimer =
-        setTimeout(() => {
-            toast.classList.remove("show");
-        }, 700);
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            700
+        );
 }
 
 
-/* 처음 실행 */
+/* =========================
+   시작
+========================= */
 
 renderOrder();
+
 updateToday();
 
 </script>
