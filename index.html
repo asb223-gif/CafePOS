@@ -13,18 +13,12 @@
 <title>카페 POS</title>
 
 <style>
-
-/* =========================
-   기본 설정
-========================= */
-
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
 
-html,
-body {
+html, body {
     margin: 0;
     touch-action: manipulation;
     -webkit-text-size-adjust: 100%;
@@ -32,12 +26,7 @@ body {
 }
 
 body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Apple SD Gothic Neo",
-        sans-serif;
-
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
     background: #f2f3ef;
     color: #222;
 }
@@ -48,28 +37,20 @@ button {
     touch-action: manipulation;
 }
 
-.menu,
-.drink-card {
+.menu, .drink-card {
     touch-action: manipulation;
 }
 
-
-/* =========================
-   상단
-========================= */
+/* 상단 */
 
 header {
     min-height: 82px;
-
     background: #20382c;
     color: white;
-
     padding: 12px 24px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: 15px;
 }
 
@@ -100,91 +81,63 @@ header {
 
 .sales-history-btn {
     height: 45px;
-
     padding: 0 16px;
-
     border: 1px solid rgba(255,255,255,.3);
     border-radius: 11px;
-
     background: rgba(255,255,255,.12);
     color: white;
-
     font-size: 13px;
     font-weight: 900;
 }
 
-
-/* =========================
-   3단 레이아웃
-========================= */
+/* 메인 */
 
 .main {
     width: 100%;
-
     padding: 15px;
-
     display: grid;
-
     grid-template-columns:
         minmax(190px,.65fr)
         minmax(310px,.95fr)
         minmax(480px,1.7fr);
-
     gap: 14px;
-
     align-items: start;
 }
 
 .panel {
     background: white;
-
     border-radius: 18px;
-
     padding: 17px;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,.05);
+    box-shadow: 0 3px 14px rgba(0,0,0,.05);
 }
 
 .panel-title {
     margin: 0 0 15px;
-
     font-size: 20px;
     font-weight: 900;
 }
 
-
-/* =========================
-   메뉴
-========================= */
+/* 메뉴 */
 
 .menu-grid {
     display: grid;
-
     grid-template-columns: 1fr;
-
     gap: 9px;
 }
 
 .menu {
     width: 100%;
     min-height: 78px;
-
     border: 2px solid #e2e5e0;
     border-radius: 14px;
-
     background: white;
-
     padding: 14px;
-
     text-align: left;
 }
 
 .menu:active {
     transform: scale(.97);
-
     background: #e5eee8;
-    border-color: #426a55;
 }
 
 .menu-name {
@@ -194,28 +147,21 @@ header {
 
 .menu-price {
     margin-top: 5px;
-
     font-size: 14px;
     color: #777;
 }
 
-
-/* =========================
-   현재 주문
-========================= */
+/* 현재 주문 */
 
 .order-header {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
-
     margin-bottom: 14px;
 }
 
 .order-header h2 {
     margin: 0;
-
     font-size: 20px;
 }
 
@@ -224,51 +170,34 @@ header {
     color: #777;
 }
 
-
-/* 다음 손님 */
-
 .next-customer {
     background: #edf4ef;
-
     border: 2px solid #d6e5da;
     border-radius: 12px;
-
     padding: 10px 12px;
-
     margin-bottom: 12px;
-
     font-size: 12px;
     color: #52705d;
     font-weight: 800;
-
     text-align: center;
 }
 
 .empty {
     color: #aaa;
-
     text-align: center;
-
     padding: 40px 10px;
 }
-
-
-/* 주문 항목 */
 
 .order-item {
     border: 2px solid #e8eae6;
     border-radius: 14px;
-
     padding: 13px;
-
     margin-bottom: 10px;
 }
 
 .order-top {
     display: flex;
-
     justify-content: space-between;
-
     gap: 10px;
 }
 
@@ -280,211 +209,144 @@ header {
 .order-price {
     font-size: 18px;
     font-weight: 900;
-
     white-space: nowrap;
 }
 
 .hot-only {
     margin-top: 5px;
-
     font-size: 12px;
-
     color: #a0523f;
-
     font-weight: 800;
 }
 
 .label {
     margin: 11px 0 5px;
-
     color: #888;
-
     font-size: 11px;
-
     font-weight: 700;
 }
 
-
-/* =========================
-   ICE / HOT
-========================= */
+/* 온도 */
 
 .temp-buttons {
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 6px;
 }
 
 .temp-btn {
     height: 41px;
-
     border: 2px solid #e0e3df;
     border-radius: 9px;
-
     background: #f8f9f7;
-
     font-size: 14px;
     font-weight: 900;
 }
 
 .temp-btn.ice.selected {
     background: #397ba9;
-
     border-color: #397ba9;
-
     color: white;
 }
 
 .temp-btn.hot.selected {
     background: #a75a47;
-
     border-color: #a75a47;
-
     color: white;
 }
 
-
-/* =========================
-   할인
-========================= */
+/* 할인 */
 
 .discount-buttons {
     display: grid;
-
-    grid-template-columns:
-        .75fr 1.15fr 1.15fr;
-
+    grid-template-columns: .75fr 1.15fr 1.15fr;
     gap: 5px;
 }
 
 .discount-btn {
     min-height: 45px;
-
     padding: 4px;
-
     border: 2px solid #e0e3df;
     border-radius: 9px;
-
     background: #f8f9f7;
-
     font-size: 11px;
     font-weight: 900;
 }
 
 .discount-btn.selected {
     background: #294c39;
-
     border-color: #294c39;
-
     color: white;
 }
 
-
-/* =========================
-   수량
-========================= */
+/* 수량 */
 
 .quantity-area {
     margin-top: 11px;
-
     display: flex;
-
     justify-content: space-between;
     align-items: center;
-
     background: #f4f5f2;
-
     border-radius: 11px;
-
     padding: 7px;
 }
 
 .quantity-label {
     padding-left: 5px;
-
     font-size: 12px;
-
     color: #777;
-
     font-weight: 700;
 }
 
 .quantity-control {
     display: flex;
-
     align-items: center;
-
     gap: 5px;
 }
 
 .qty-btn {
     width: 38px;
     height: 38px;
-
     border: 0;
     border-radius: 9px;
-
     background: white;
-
     font-size: 22px;
-
     font-weight: 700;
-
-    box-shadow:
-        0 1px 5px rgba(0,0,0,.08);
+    box-shadow: 0 1px 5px rgba(0,0,0,.08);
 }
 
 .qty-number {
     min-width: 38px;
-
     text-align: center;
-
     font-size: 18px;
-
     font-weight: 900;
 }
 
 .delete-btn {
     width: 100%;
     height: 34px;
-
     margin-top: 8px;
-
     border: 0;
     border-radius: 8px;
-
     background: #f6eaea;
-
     color: #9a3e3e;
-
     font-size: 12px;
-
     font-weight: 800;
 }
 
-
-/* =========================
-   결제
-========================= */
+/* 결제 */
 
 .total-area {
     margin-top: 15px;
-
     padding-top: 15px;
-
     border-top: 2px solid #eee;
 }
 
 .total {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
-
     font-size: 21px;
-
     font-weight: 900;
 }
 
@@ -495,69 +357,43 @@ header {
 .checkout {
     width: 100%;
     height: 58px;
-
     margin-top: 13px;
-
     border: 0;
     border-radius: 13px;
-
     background: #17271f;
-
     color: white;
-
     font-size: 18px;
-
     font-weight: 900;
 }
 
-
-/* =========================
-   제조 현황
-========================= */
+/* 제조 */
 
 .production-header {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
-
     margin-bottom: 14px;
 }
 
 .production-header h2 {
     margin: 0;
-
     font-size: 20px;
 }
 
 .pending-count {
     background: #fff0d8;
-
     color: #9b6417;
-
     border-radius: 20px;
-
     padding: 6px 11px;
-
     font-size: 12px;
-
     font-weight: 900;
 }
 
-
-/* =========================
-   팀별 주문
-========================= */
-
 .team-order {
     border: 2px solid #dedfdc;
-
     border-radius: 16px;
-
     margin-bottom: 15px;
-
     overflow: hidden;
-
     background: white;
 }
 
@@ -567,33 +403,25 @@ header {
 
 .team-header {
     background: #293d32;
-
     color: white;
-
     padding: 11px 13px;
-
     display: flex;
-
     justify-content: space-between;
     align-items: center;
 }
 
-.team-order.all-completed
-.team-header {
+.team-order.all-completed .team-header {
     background: #718078;
 }
 
 .team-number {
     font-size: 17px;
-
     font-weight: 900;
 }
 
 .team-complete-label {
     margin-left: 5px;
-
     font-size: 10px;
-
     opacity: .8;
 }
 
@@ -603,59 +431,34 @@ header {
 
 .team-time {
     font-size: 11px;
-
     opacity: .75;
 }
 
 .team-price {
     margin-top: 2px;
-
     font-size: 14px;
-
     font-weight: 900;
 }
 
-
-/* =========================
-   제조 음료
-   한 잔당 한 카드
-   가로 3칸
-========================= */
-
 .drink-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
+    grid-template-columns: repeat(3,minmax(0,1fr));
     gap: 8px;
-
     padding: 10px;
 }
 
 .drink-card {
     min-width: 0;
-
     min-height: 115px;
-
     border: 2px solid #e4a13e;
-
     border-radius: 12px;
-
     background: #fff6e7;
-
     padding: 8px 5px;
-
     text-align: center;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
-
-    cursor: pointer;
 }
 
 .drink-card:active {
@@ -664,133 +467,86 @@ header {
 
 .drink-card.completed {
     background: #dfe9e3;
-
     border-color: #769081;
 }
 
 .drink-name {
     font-size: 13px;
-
     font-weight: 900;
-
-    overflow-wrap: anywhere;
 }
 
 .drink-temp {
     margin-top: 5px;
-
     font-size: 12px;
-
     font-weight: 900;
 }
 
 .drink-discount {
     margin-top: 5px;
-
     font-size: 9px;
-
     color: #777;
 }
 
 .drink-status {
     margin-top: 8px;
-
     font-size: 10px;
-
     font-weight: 900;
-
     color: #9b6417;
 }
 
-.drink-card.completed
-.drink-status {
+.drink-card.completed .drink-status {
     color: #365a46;
 }
 
-
-/* 주문 하단 */
-
 .team-bottom {
     padding: 0 10px 10px;
-
     display: flex;
-
     justify-content: space-between;
     align-items: center;
-
     gap: 8px;
 }
 
 .team-progress {
     font-size: 10px;
-
     color: #888;
 }
 
 .cancel-order {
     border: 0;
-
     border-radius: 7px;
-
     background: #f5e5e5;
-
     color: #a14444;
-
     padding: 7px 9px;
-
     font-size: 10px;
-
     font-weight: 800;
 }
 
-
-/* =========================
-   기록 초기화
-========================= */
-
 .production-bottom {
     margin-top: 15px;
-
     padding-top: 13px;
-
     border-top: 1px solid #eee;
 }
 
 .reset {
     width: 100%;
     height: 38px;
-
     border: 0;
     border-radius: 9px;
-
     background: #eee;
-
     color: #666;
-
     font-size: 11px;
-
     font-weight: 700;
 }
 
-
-/* =========================
-   매출 기록 모달
-========================= */
+/* 매출 기록 */
 
 .modal {
     display: none;
-
     position: fixed;
-
     z-index: 2000;
-
     inset: 0;
-
-    background:
-        rgba(0,0,0,.45);
-
+    background: rgba(0,0,0,.45);
     padding: 20px;
-
     overflow: auto;
 }
 
@@ -800,47 +556,33 @@ header {
 
 .modal-box {
     width: min(720px,100%);
-
     margin: 25px auto;
-
     background: #f5f6f3;
-
     border-radius: 20px;
-
     overflow: hidden;
 }
 
 .modal-header {
     background: #20382c;
-
     color: white;
-
     padding: 18px;
-
     display: flex;
-
     justify-content: space-between;
     align-items: center;
 }
 
 .modal-header h2 {
     margin: 0;
-
     font-size: 21px;
 }
 
 .close-btn {
     width: 38px;
     height: 38px;
-
     border: 0;
     border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.15);
-
+    background: rgba(255,255,255,.15);
     color: white;
-
     font-size: 20px;
 }
 
@@ -850,56 +592,41 @@ header {
 
 .day-card {
     background: white;
-
     border-radius: 14px;
-
     margin-bottom: 10px;
-
     overflow: hidden;
-
     border: 1px solid #e5e7e3;
 }
 
 .day-summary {
     width: 100%;
-
     border: 0;
-
     background: white;
-
     padding: 15px;
-
     display: flex;
-
     justify-content: space-between;
     align-items: center;
-
     text-align: left;
 }
 
 .day-date {
     font-size: 16px;
-
     font-weight: 900;
 }
 
 .day-count {
     margin-top: 4px;
-
     font-size: 11px;
-
     color: #888;
 }
 
 .day-sales {
     font-size: 18px;
-
     font-weight: 900;
 }
 
 .day-detail {
     display: none;
-
     padding: 0 15px 15px;
 }
 
@@ -909,65 +636,60 @@ header {
 
 .detail-box {
     border-top: 1px solid #eee;
-
     padding-top: 12px;
 }
 
 .detail-title {
     font-size: 12px;
-
     color: #888;
-
     font-weight: 900;
-
     margin: 10px 0 6px;
 }
 
 .detail-row {
     display: flex;
-
     justify-content: space-between;
-
     padding: 5px 0;
-
     font-size: 13px;
 }
 
 .detail-total {
     margin-top: 12px;
-
     padding: 11px;
-
     border-radius: 10px;
-
     background: #edf3ef;
-
     font-size: 13px;
-
     line-height: 1.8;
 }
 
+/* 날짜별 삭제 버튼 */
 
-/* =========================
-   주문 완료 큰 화면
-========================= */
+.delete-day-btn {
+    width: 100%;
+    height: 42px;
+    margin-top: 13px;
+    border: 1px solid #e8caca;
+    border-radius: 10px;
+    background: #fff2f2;
+    color: #a13d3d;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.delete-day-btn:active {
+    background: #f4dddd;
+}
+
+/* 주문 완료 */
 
 .order-success {
     display: none;
-
     position: fixed;
-
     inset: 0;
-
     z-index: 3000;
-
-    background:
-        rgba(20,30,25,.72);
-
+    background: rgba(20,30,25,.72);
     align-items: center;
-
     justify-content: center;
-
     padding: 20px;
 }
 
@@ -977,17 +699,10 @@ header {
 
 .success-box {
     width: min(420px,90%);
-
     background: white;
-
     border-radius: 22px;
-
     padding: 32px 20px;
-
     text-align: center;
-
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.2);
 }
 
 .success-check {
@@ -996,52 +711,30 @@ header {
 
 .success-title {
     margin-top: 10px;
-
     font-size: 28px;
-
     font-weight: 900;
 }
 
 .success-next {
     margin-top: 8px;
-
     color: #718078;
-
     font-size: 14px;
-
     font-weight: 800;
 }
 
-
-/* =========================
-   알림
-========================= */
-
 .toast {
     position: fixed;
-
     left: 50%;
     bottom: 25px;
-
-    transform:
-        translateX(-50%);
-
+    transform: translateX(-50%);
     background: #17261f;
-
     color: white;
-
     padding: 12px 22px;
-
     border-radius: 30px;
-
     font-weight: 800;
-
     opacity: 0;
-
     pointer-events: none;
-
     transition: .15s;
-
     z-index: 4000;
 }
 
@@ -1049,20 +742,13 @@ header {
     opacity: 1;
 }
 
-
-/* =========================
-   작은 화면
-========================= */
-
 @media(max-width:950px) {
-
     .main {
         grid-template-columns: 1fr;
     }
 
     .menu-grid {
-        grid-template-columns:
-            repeat(3,1fr);
+        grid-template-columns: repeat(3,1fr);
     }
 
     .menu {
@@ -1070,9 +756,7 @@ header {
     }
 }
 
-
 @media(max-width:600px) {
-
     header {
         padding: 10px 12px;
     }
@@ -1087,7 +771,6 @@ header {
 
     .sales-history-btn {
         padding: 0 9px;
-
         font-size: 11px;
     }
 
@@ -1096,8 +779,7 @@ header {
     }
 
     .menu-grid {
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns: repeat(2,1fr);
     }
 
     .panel {
@@ -1105,24 +787,16 @@ header {
     }
 
     .drink-grid {
-        grid-template-columns:
-            repeat(3,1fr);
+        grid-template-columns: repeat(3,1fr);
     }
 }
-
 </style>
 </head>
 
-
 <body>
 
-
 <header>
-
-    <div class="logo">
-        ☕ 카페 POS
-    </div>
-
+    <div class="logo">☕ 카페 POS</div>
 
     <div class="header-right">
 
@@ -1133,237 +807,139 @@ header {
             📊 매출 기록
         </button>
 
-
         <div class="sales">
-
-            <small>
-                오늘 총매출
-            </small>
-
-            <div id="todaySales">
-                0원
-            </div>
-
+            <small>오늘 총매출</small>
+            <div id="todaySales">0원</div>
         </div>
 
     </div>
-
 </header>
-
-
 
 <div class="main">
 
+    <!-- 메뉴 -->
 
-<!-- =========================
-     메뉴
-========================= -->
+    <section class="panel">
 
-<section class="panel">
+        <h2 class="panel-title">메뉴</h2>
 
-    <h2 class="panel-title">
-        메뉴
-    </h2>
+        <div class="menu-grid">
 
+            <button
+                class="menu"
+                onclick="addItem('아메리카노',4000,true)"
+            >
+                <div class="menu-name">☕ 아메리카노</div>
+                <div class="menu-price">4,000원</div>
+            </button>
 
-    <div class="menu-grid">
+            <button
+                class="menu"
+                onclick="addItem('카페라떼',5000,true)"
+            >
+                <div class="menu-name">🥛 카페라떼</div>
+                <div class="menu-price">5,000원</div>
+            </button>
 
+            <button
+                class="menu"
+                onclick="addItem('한방차',9000,false)"
+            >
+                <div class="menu-name">🍵 한방차</div>
+                <div class="menu-price">9,000원 · HOT</div>
+            </button>
 
-        <button
-            class="menu"
-            onclick="addItem('아메리카노',4000,true)"
-        >
+            <button
+                class="menu"
+                onclick="addItem('캐모마일',5000,false)"
+            >
+                <div class="menu-name">🌼 캐모마일</div>
+                <div class="menu-price">5,000원 · HOT</div>
+            </button>
 
-            <div class="menu-name">
-                ☕ 아메리카노
-            </div>
-
-            <div class="menu-price">
-                4,000원
-            </div>
-
-        </button>
-
-
-        <button
-            class="menu"
-            onclick="addItem('카페라떼',5000,true)"
-        >
-
-            <div class="menu-name">
-                🥛 카페라떼
-            </div>
-
-            <div class="menu-price">
-                5,000원
-            </div>
-
-        </button>
-
-
-        <button
-            class="menu"
-            onclick="addItem('한방차',9000,false)"
-        >
-
-            <div class="menu-name">
-                🍵 한방차
-            </div>
-
-            <div class="menu-price">
-                9,000원 · HOT
-            </div>
-
-        </button>
-
-
-        <button
-            class="menu"
-            onclick="addItem('캐모마일',5000,false)"
-        >
-
-            <div class="menu-name">
-                🌼 캐모마일
-            </div>
-
-            <div class="menu-price">
-                5,000원 · HOT
-            </div>
-
-        </button>
-
-
-        <button
-            class="menu"
-            onclick="addItem('페퍼민트',5000,false)"
-        >
-
-            <div class="menu-name">
-                🌿 페퍼민트
-            </div>
-
-            <div class="menu-price">
-                5,000원 · HOT
-            </div>
-
-        </button>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     현재 주문
-========================= -->
-
-<section class="panel">
-
-
-    <div class="order-header">
-
-        <h2>
-            현재 주문
-        </h2>
-
-        <span id="orderCount"></span>
-
-    </div>
-
-
-    <div
-        class="next-customer"
-        id="nextCustomer"
-    >
-        새 손님 주문
-    </div>
-
-
-    <div id="orderList"></div>
-
-
-    <div class="total-area">
-
-
-        <div class="total">
-
-            <span>
-                결제금액
-            </span>
-
-            <span id="total">
-                0원
-            </span>
+            <button
+                class="menu"
+                onclick="addItem('페퍼민트',5000,false)"
+            >
+                <div class="menu-name">🌿 페퍼민트</div>
+                <div class="menu-price">5,000원 · HOT</div>
+            </button>
 
         </div>
 
+    </section>
 
-        <button
-            class="checkout"
-            onclick="checkout()"
-        >
-            주문 완료
-        </button>
+    <!-- 현재 주문 -->
 
+    <section class="panel">
 
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================
-     제조 현황
-========================= -->
-
-<section class="panel">
-
-
-    <div class="production-header">
-
-        <h2>
-            제조 현황
-        </h2>
-
+        <div class="order-header">
+            <h2>현재 주문</h2>
+            <span id="orderCount"></span>
+        </div>
 
         <div
-            class="pending-count"
-            id="pendingCount"
+            class="next-customer"
+            id="nextCustomer"
         >
-            대기 0잔
+            새 손님 주문
         </div>
 
-    </div>
+        <div id="orderList"></div>
 
+        <div class="total-area">
 
-    <div id="productionList"></div>
+            <div class="total">
+                <span>결제금액</span>
+                <span id="total">0원</span>
+            </div>
 
+            <button
+                class="checkout"
+                onclick="checkout()"
+            >
+                주문 완료
+            </button>
 
-    <div class="production-bottom">
+        </div>
 
-        <button
-            class="reset"
-            onclick="resetToday()"
-        >
-            오늘 기록 초기화
-        </button>
+    </section>
 
-    </div>
+    <!-- 제조 현황 -->
 
+    <section class="panel">
 
-</section>
+        <div class="production-header">
 
+            <h2>제조 현황</h2>
+
+            <div
+                class="pending-count"
+                id="pendingCount"
+            >
+                대기 0잔
+            </div>
+
+        </div>
+
+        <div id="productionList"></div>
+
+        <div class="production-bottom">
+
+            <button
+                class="reset"
+                onclick="resetToday()"
+            >
+                오늘 기록 초기화
+            </button>
+
+        </div>
+
+    </section>
 
 </div>
 
-
-
-<!-- =========================
-     매출 기록 창
-========================= -->
+<!-- 매출 기록 -->
 
 <div
     class="modal"
@@ -1371,16 +947,11 @@ header {
     onclick="modalBackgroundClose(event)"
 >
 
-
     <div class="modal-box">
-
 
         <div class="modal-header">
 
-            <h2>
-                📊 매출 기록
-            </h2>
-
+            <h2>📊 매출 기록</h2>
 
             <button
                 class="close-btn"
@@ -1391,37 +962,25 @@ header {
 
         </div>
 
-
         <div
             class="sales-list"
             id="salesHistoryList"
         ></div>
 
-
     </div>
-
 
 </div>
 
-
-
-<!-- =========================
-     주문 완료 화면
-========================= -->
+<!-- 주문 완료 -->
 
 <div
     class="order-success"
     id="orderSuccess"
 >
 
-
     <div class="success-box">
 
-
-        <div class="success-check">
-            ✓
-        </div>
-
+        <div class="success-check">✓</div>
 
         <div
             class="success-title"
@@ -1430,77 +989,46 @@ header {
             주문 완료
         </div>
 
-
         <div class="success-next">
             다음 손님 주문을 받을 수 있습니다
         </div>
 
-
     </div>
 
-
 </div>
-
-
 
 <div
     class="toast"
     id="toast"
 ></div>
 
-
-
 <script>
-
-/* =========================
-   현재 주문
-========================= */
 
 let currentOrder = [];
 
 
-/* =========================
-   날짜
-========================= */
+/* 날짜 */
 
 function todayKey() {
 
-    const d =
-        new Date();
-
+    const d = new Date();
 
     return (
-
-        d.getFullYear() +
-        "-" +
-
-        String(
-            d.getMonth()+1
-        ).padStart(2,"0") +
-        "-" +
-
-        String(
-            d.getDate()
-        ).padStart(2,"0")
-
+        d.getFullYear() + "-" +
+        String(d.getMonth()+1).padStart(2,"0") + "-" +
+        String(d.getDate()).padStart(2,"0")
     );
 }
 
 
-/* =========================
-   저장
-========================= */
+/* 저장 */
 
 function getDatabase() {
 
     try {
 
         return JSON.parse(
-
-            localStorage.getItem(
-                "cafePOS"
-            ) || "{}"
-
+            localStorage.getItem("cafePOS") || "{}"
         );
 
     } catch {
@@ -1513,42 +1041,24 @@ function getDatabase() {
 function saveDatabase(db) {
 
     localStorage.setItem(
-
         "cafePOS",
-
         JSON.stringify(db)
-
     );
 }
 
 
-/* =========================
-   메뉴 추가
-========================= */
+/* 메뉴 */
 
-function addItem(
-    name,
-    price,
-    tempChoice
-) {
-
+function addItem(name, price, tempChoice) {
 
     if (!tempChoice) {
 
         const existing =
-            currentOrder.find(
-
-                item =>
-
-                    item.name === name &&
-
-                    item.temp === "HOT" &&
-
-                    item.discount ===
-                    "normal"
-
+            currentOrder.find(item =>
+                item.name === name &&
+                item.temp === "HOT" &&
+                item.discount === "normal"
             );
-
 
         if (existing) {
 
@@ -1559,24 +1069,15 @@ function addItem(
             return;
         }
     }
-
 
     if (tempChoice) {
 
         const existing =
-            currentOrder.find(
-
-                item =>
-
-                    item.name === name &&
-
-                    item.temp === "" &&
-
-                    item.discount ===
-                    "normal"
-
+            currentOrder.find(item =>
+                item.name === name &&
+                item.temp === "" &&
+                item.discount === "normal"
             );
-
 
         if (existing) {
 
@@ -1588,47 +1089,26 @@ function addItem(
         }
     }
 
-
     currentOrder.push({
 
-        name:
-            name,
-
-        basePrice:
-            price,
-
-        tempChoice:
-            tempChoice,
-
-        temp:
-            tempChoice
-            ? ""
-            : "HOT",
-
-        discount:
-            "normal",
-
-        quantity:
-            1
+        name: name,
+        basePrice: price,
+        tempChoice: tempChoice,
+        temp: tempChoice ? "" : "HOT",
+        discount: "normal",
+        quantity: 1
 
     });
 
-
     renderOrder();
 }
 
 
-/* =========================
-   온도
-========================= */
+/* 옵션 */
 
-function setTemp(
-    index,
-    temp
-) {
+function setTemp(index, temp) {
 
-    currentOrder[index].temp =
-        temp;
+    currentOrder[index].temp = temp;
 
     mergeSameItems();
 
@@ -1636,360 +1116,185 @@ function setTemp(
 }
 
 
-/* =========================
-   할인
-========================= */
+function setDiscount(index, discount) {
 
-function setDiscount(
-    index,
-    discount
-) {
-
-    currentOrder[index].discount =
-        discount;
+    currentOrder[index].discount = discount;
 
     mergeSameItems();
 
     renderOrder();
 }
 
-
-/* =========================
-   같은 주문 합치기
-========================= */
 
 function mergeSameItems() {
 
     const merged = [];
 
+    currentOrder.forEach(item => {
 
-    currentOrder.forEach(
-        item => {
+        const existing =
+            merged.find(x =>
+                x.name === item.name &&
+                x.temp === item.temp &&
+                x.discount === item.discount
+            );
 
+        if (existing) {
 
-            const existing =
-                merged.find(
+            existing.quantity += item.quantity;
 
-                    x =>
+        } else {
 
-                        x.name ===
-                        item.name &&
-
-                        x.temp ===
-                        item.temp &&
-
-                        x.discount ===
-                        item.discount
-
-                );
-
-
-            if (existing) {
-
-                existing.quantity +=
-                    item.quantity;
-
-            } else {
-
-                merged.push({
-                    ...item
-                });
-            }
-
+            merged.push({...item});
         }
-    );
 
+    });
 
-    currentOrder =
-        merged;
+    currentOrder = merged;
 }
 
 
-/* =========================
-   할인
-========================= */
+/* 할인 */
 
-function discountRate(
-    discount
-) {
+function discountRate(discount) {
 
-    if (
-        discount === "senior"
-    ) {
-
+    if (discount === "senior") {
         return .30;
     }
 
-
-    if (
-        discount === "family"
-    ) {
-
+    if (discount === "family") {
         return .10;
     }
-
 
     return 0;
 }
 
 
-function discountName(
-    discount
-) {
-
-    if (
-        discount === "senior"
-    ) {
-
-        return "55세 이상 30%";
-    }
-
-
-    if (
-        discount === "family"
-    ) {
-
-        return "이웃가족 10%";
-    }
-
-
-    return "일반";
-}
-
-
-/* =========================
-   가격
-========================= */
-
-function singlePrice(
-    item
-) {
+function singlePrice(item) {
 
     return Math.round(
-
         item.basePrice *
-
-        (
-            1 -
-            discountRate(
-                item.discount
-            )
-        )
-
+        (1 - discountRate(item.discount))
     );
 }
 
 
-function itemTotal(
-    item
-) {
+function itemTotal(item) {
 
     return (
-
         singlePrice(item) *
         item.quantity
-
     );
 }
 
 
-/* =========================
-   수량
-========================= */
+/* 수량 */
 
-function increaseQty(
-    index
-) {
+function increaseQty(index) {
 
-    currentOrder[index]
-        .quantity++;
+    currentOrder[index].quantity++;
 
     renderOrder();
 }
 
 
-function decreaseQty(
-    index
-) {
+function decreaseQty(index) {
 
-    if (
-        currentOrder[index]
-        .quantity > 1
-    ) {
+    if (currentOrder[index].quantity > 1) {
 
-        currentOrder[index]
-            .quantity--;
+        currentOrder[index].quantity--;
 
     } else {
 
-        currentOrder.splice(
-            index,
-            1
-        );
+        currentOrder.splice(index,1);
     }
 
+    renderOrder();
+}
+
+
+function deleteItem(index) {
+
+    currentOrder.splice(index,1);
 
     renderOrder();
 }
 
 
-function deleteItem(
-    index
-) {
-
-    currentOrder.splice(
-        index,
-        1
-    );
-
-    renderOrder();
-}
-
-
-/* =========================
-   현재 주문 표시
-========================= */
+/* 현재 주문 표시 */
 
 function renderOrder() {
 
     const list =
-        document.getElementById(
-            "orderList"
-        );
-
+        document.getElementById("orderList");
 
     const totalQuantity =
         currentOrder.reduce(
-
-            (sum,item) =>
-                sum +
-                item.quantity,
-
+            (sum,item) => sum + item.quantity,
             0
-
         );
-
 
     document.getElementById(
         "orderCount"
     ).textContent =
-
         totalQuantity
         ? totalQuantity + "잔"
         : "";
 
-
-    if (
-        !currentOrder.length
-    ) {
+    if (!currentOrder.length) {
 
         list.innerHTML =
-
-            '<div class="empty">' +
-            '메뉴를 눌러주세요' +
-            '</div>';
-
+            '<div class="empty">메뉴를 눌러주세요</div>';
 
         document.getElementById(
             "total"
-        ).textContent =
-            "0원";
-
+        ).textContent = "0원";
 
         return;
     }
 
-
     list.innerHTML =
-
         currentOrder
-        .map(
-            (item,index) => {
+        .map((item,index) => {
 
+            let tempHTML;
 
-                let tempHTML;
+            if (item.tempChoice) {
 
-
-                if (
-                    item.tempChoice
-                ) {
-
-                    tempHTML = `
+                tempHTML = `
 
                     <div class="label">
                         ICE / HOT
                     </div>
 
-
                     <div class="temp-buttons">
 
-
                         <button
-                            class="
-                                temp-btn
-                                ice
-                                ${
-                                    item.temp === "ICE"
-                                    ? "selected"
-                                    : ""
-                                }
-                            "
-
-                            onclick="
-                                setTemp(
-                                    ${index},
-                                    'ICE'
-                                )
-                            "
+                            class="temp-btn ice ${item.temp==="ICE" ? "selected" : ""}"
+                            onclick="setTemp(${index},'ICE')"
                         >
-
                             🧊 ICE
-
                         </button>
-
 
                         <button
-                            class="
-                                temp-btn
-                                hot
-                                ${
-                                    item.temp === "HOT"
-                                    ? "selected"
-                                    : ""
-                                }
-                            "
-
-                            onclick="
-                                setTemp(
-                                    ${index},
-                                    'HOT'
-                                )
-                            "
+                            class="temp-btn hot ${item.temp==="HOT" ? "selected" : ""}"
+                            onclick="setTemp(${index},'HOT')"
                         >
-
                             🔥 HOT
-
                         </button>
-
 
                     </div>
+                `;
 
-                    `;
+            } else {
 
-                } else {
+                tempHTML =
+                    '<div class="hot-only">🔥 HOT 전용</div>';
+            }
 
-                    tempHTML =
-
-                        '<div class="hot-only">' +
-                        '🔥 HOT 전용' +
-                        '</div>';
-                }
-
-
-                return `
+            return `
 
                 <div class="order-item">
-
 
                     <div class="order-top">
 
@@ -1998,353 +1303,187 @@ function renderOrder() {
                         </div>
 
                         <div class="order-price">
-
-                            ${
-                                itemTotal(item)
-                                .toLocaleString()
-                            }원
-
+                            ${itemTotal(item).toLocaleString()}원
                         </div>
 
                     </div>
 
-
                     ${tempHTML}
-
 
                     <div class="label">
                         할인
                     </div>
 
-
                     <div class="discount-buttons">
 
-
                         <button
-                            class="
-                                discount-btn
-                                ${
-                                    item.discount === "normal"
-                                    ? "selected"
-                                    : ""
-                                }
-                            "
-
-                            onclick="
-                                setDiscount(
-                                    ${index},
-                                    'normal'
-                                )
-                            "
+                            class="discount-btn ${item.discount==="normal" ? "selected" : ""}"
+                            onclick="setDiscount(${index},'normal')"
                         >
-
                             일반
-
                         </button>
-
 
                         <button
-                            class="
-                                discount-btn
-                                ${
-                                    item.discount === "senior"
-                                    ? "selected"
-                                    : ""
-                                }
-                            "
-
-                            onclick="
-                                setDiscount(
-                                    ${index},
-                                    'senior'
-                                )
-                            "
+                            class="discount-btn ${item.discount==="senior" ? "selected" : ""}"
+                            onclick="setDiscount(${index},'senior')"
                         >
-
-                            55세 이상
-                            <br>
-                            30%
-
+                            55세 이상<br>30%
                         </button>
-
 
                         <button
-                            class="
-                                discount-btn
-                                ${
-                                    item.discount === "family"
-                                    ? "selected"
-                                    : ""
-                                }
-                            "
-
-                            onclick="
-                                setDiscount(
-                                    ${index},
-                                    'family'
-                                )
-                            "
+                            class="discount-btn ${item.discount==="family" ? "selected" : ""}"
+                            onclick="setDiscount(${index},'family')"
                         >
-
-                            이웃가족
-                            <br>
-                            10%
-
+                            이웃가족<br>10%
                         </button>
-
 
                     </div>
 
-
                     <div class="quantity-area">
-
 
                         <div class="quantity-label">
                             수량
                         </div>
 
-
                         <div class="quantity-control">
-
 
                             <button
                                 class="qty-btn"
-
-                                onclick="
-                                    decreaseQty(
-                                        ${index}
-                                    )
-                                "
+                                onclick="decreaseQty(${index})"
                             >
                                 −
                             </button>
 
-
                             <div class="qty-number">
-
                                 ${item.quantity}
-
                             </div>
-
 
                             <button
                                 class="qty-btn"
-
-                                onclick="
-                                    increaseQty(
-                                        ${index}
-                                    )
-                                "
+                                onclick="increaseQty(${index})"
                             >
                                 +
                             </button>
 
-
                         </div>
-
 
                     </div>
 
-
                     <button
                         class="delete-btn"
-
-                        onclick="
-                            deleteItem(
-                                ${index}
-                            )
-                        "
+                        onclick="deleteItem(${index})"
                     >
-
                         항목 삭제
-
                     </button>
 
-
                 </div>
+            `;
 
-                `;
-
-            }
-        )
+        })
         .join("");
-
 
     const total =
         currentOrder.reduce(
-
-            (sum,item) =>
-                sum +
-                itemTotal(item),
-
+            (sum,item) => sum + itemTotal(item),
             0
-
         );
-
 
     document.getElementById(
         "total"
     ).textContent =
-
-        total.toLocaleString() +
-        "원";
+        total.toLocaleString() + "원";
 }
 
 
-/* =========================
-   다음 주문번호
-========================= */
+/* 주문 번호 */
 
-function getNextOrderNumber(
-    orders
-) {
+function getNextOrderNumber(orders) {
 
     let max = 0;
 
+    orders.forEach(order => {
 
-    orders.forEach(
-        order => {
+        max =
+            Math.max(
+                max,
+                Number(order.orderNumber || 0)
+            );
 
-            max =
-                Math.max(
-
-                    max,
-
-                    Number(
-                        order.orderNumber ||
-                        0
-                    )
-
-                );
-
-        }
-    );
-
+    });
 
     return max + 1;
 }
 
 
-/* =========================
-   주문 완료
-========================= */
+/* 주문 완료 */
 
 function checkout() {
 
-    if (
-        !currentOrder.length
-    ) {
+    if (!currentOrder.length) {
 
-        alert(
-            "주문이 없습니다."
-        );
+        alert("주문이 없습니다.");
 
         return;
     }
 
-
     const missing =
         currentOrder.find(
-
             item =>
                 item.tempChoice &&
                 !item.temp
-
         );
-
 
     if (missing) {
 
         alert(
-
             missing.name +
             "의 ICE / HOT을 선택해주세요."
-
         );
 
         return;
     }
 
-
     const total =
         currentOrder.reduce(
-
             (sum,item) =>
-                sum +
-                itemTotal(item),
-
+                sum + itemTotal(item),
             0
-
         );
-
 
     const savedItems =
-        currentOrder.map(
-            item => ({
+        currentOrder.map(item => ({
 
-                name:
-                    item.name,
+            name: item.name,
+            temp: item.temp,
+            discount: item.discount,
+            quantity: item.quantity,
+            unitPrice: singlePrice(item),
+            price: itemTotal(item)
 
-                temp:
-                    item.temp,
+        }));
 
-                discount:
-                    item.discount,
+    const db = getDatabase();
 
-                quantity:
-                    item.quantity,
-
-                unitPrice:
-                    singlePrice(item),
-
-                price:
-                    itemTotal(item)
-
-            })
-        );
-
-
-    const db =
-        getDatabase();
-
-
-    const key =
-        todayKey();
-
+    const key = todayKey();
 
     if (!db[key]) {
-
         db[key] = [];
     }
 
-
-    const orderId =
-        Date.now();
-
+    const orderId = Date.now();
 
     const orderNumber =
-        getNextOrderNumber(
-            db[key]
-        );
-
+        getNextOrderNumber(db[key]);
 
     const drinks = [];
-
 
     savedItems.forEach(
         (item,itemIndex) => {
 
-
             const qty =
                 item.quantity || 1;
 
-
-            for (
-                let i = 0;
-                i < qty;
-                i++
-            ) {
-
+            for (let i=0; i<qty; i++) {
 
                 drinks.push({
 
@@ -2355,17 +1494,10 @@ function checkout() {
                         "-" +
                         i,
 
-                    name:
-                        item.name,
-
-                    temp:
-                        item.temp,
-
-                    discount:
-                        item.discount,
-
-                    completed:
-                        false
+                    name: item.name,
+                    temp: item.temp,
+                    discount: item.discount,
+                    completed: false
 
                 });
 
@@ -2374,45 +1506,33 @@ function checkout() {
         }
     );
 
-
     db[key].push({
 
-        id:
-            orderId,
+        id: orderId,
 
-        orderNumber:
-            orderNumber,
+        orderNumber: orderNumber,
 
         time:
             new Date()
             .toLocaleTimeString(
                 "ko-KR",
                 {
-                    hour:
-                        "2-digit",
-
-                    minute:
-                        "2-digit"
+                    hour:"2-digit",
+                    minute:"2-digit"
                 }
             ),
 
-        total:
-            total,
+        total: total,
 
-        items:
-            savedItems,
+        items: savedItems,
 
-        drinks:
-            drinks
+        drinks: drinks
 
     });
 
-
     saveDatabase(db);
 
-
     currentOrder = [];
-
 
     renderOrder();
 
@@ -2420,127 +1540,85 @@ function checkout() {
 
     updateNextCustomer();
 
-
-    showOrderSuccess(
-        orderNumber
-    );
+    showOrderSuccess(orderNumber);
 }
 
 
-/* =========================
-   다음 손님 표시
-========================= */
+/* 다음 손님 */
 
 function updateNextCustomer() {
 
-    const db =
-        getDatabase();
-
+    const db = getDatabase();
 
     const orders =
         db[todayKey()] || [];
 
-
     const next =
-        getNextOrderNumber(
-            orders
-        );
-
+        getNextOrderNumber(orders);
 
     document.getElementById(
         "nextCustomer"
     ).textContent =
-
         "새 손님 주문 · 다음 주문 #" +
         next;
 }
 
 
-/* =========================
-   주문 완료 표시
-========================= */
+/* 주문 완료 표시 */
 
-function showOrderSuccess(
-    orderNumber
-) {
+function showOrderSuccess(orderNumber) {
 
     const box =
         document.getElementById(
             "orderSuccess"
         );
 
-
     document.getElementById(
         "successTitle"
     ).textContent =
-
         "주문 #" +
         orderNumber +
         " 접수 완료";
 
+    box.classList.add("show");
 
-    box.classList.add(
-        "show"
-    );
+    setTimeout(() => {
 
+        box.classList.remove("show");
 
-    setTimeout(
-        () => {
-
-            box.classList.remove(
-                "show"
-            );
-
-        },
-        900
-    );
+    },900);
 }
 
 
-/* =========================
-   제조 상태
-========================= */
+/* 제조 완료 */
 
-function toggleDrink(
-    orderId,
-    drinkId
-) {
+function toggleDrink(orderId, drinkId) {
 
-    const db =
-        getDatabase();
-
+    const db = getDatabase();
 
     const orders =
         db[todayKey()] || [];
 
-
     const order =
         orders.find(
-            x =>
-                x.id === orderId
+            x => x.id === orderId
         );
-
 
     if (!order) {
         return;
     }
 
-
     const drink =
         order.drinks.find(
-            x =>
-                x.id === drinkId
+            x => x.id === drinkId
         );
-
 
     if (!drink) {
         return;
     }
 
-
     drink.completed =
         !drink.completed;
-
 
     saveDatabase(db);
 
@@ -2548,100 +1626,66 @@ function toggleDrink(
 }
 
 
-/* =========================
-   주문 취소
-========================= */
+/* 주문 취소 */
 
-function cancelOrder(
-    orderId,
-    orderNumber
-) {
+function cancelOrder(orderId, orderNumber) {
 
     const answer =
         confirm(
-
             "주문 #" +
             orderNumber +
             "을 취소할까요?\n\n" +
             "취소하면 오늘 매출에서도 제외됩니다."
-
         );
-
 
     if (!answer) {
         return;
     }
 
+    const db = getDatabase();
 
-    const db =
-        getDatabase();
-
-
-    const key =
-        todayKey();
-
+    const key = todayKey();
 
     const orders =
         db[key] || [];
 
-
     db[key] =
         orders.filter(
-
             order =>
-                order.id !==
-                orderId
-
+                order.id !== orderId
         );
 
-
     saveDatabase(db);
-
 
     updateToday();
 
     updateNextCustomer();
 
-
     showToast(
-
         "주문 #" +
         orderNumber +
         " 취소 완료"
-
     );
 }
 
 
-/* =========================
-   오늘 매출 / 제조현황
-========================= */
+/* 오늘 화면 */
 
 function updateToday() {
 
-    const db =
-        getDatabase();
+    const db = getDatabase();
 
-
-    const key =
-        todayKey();
-
+    const key = todayKey();
 
     const orders =
         db[key] || [];
 
+    let changed = false;
 
-    let changed =
-        false;
-
-
-    /*
-    이전 버전 데이터 호환
-    */
+    /* 이전 데이터 호환 */
 
     orders.forEach(
         (order,index) => {
-
 
             if (!order.id) {
 
@@ -2649,43 +1693,33 @@ function updateToday() {
                     Date.now() +
                     index;
 
-                changed =
-                    true;
+                changed = true;
             }
-
 
             if (!order.orderNumber) {
 
                 order.orderNumber =
                     index + 1;
 
-                changed =
-                    true;
+                changed = true;
             }
-
 
             if (!order.drinks) {
 
-                order.drinks =
-                    [];
-
+                order.drinks = [];
 
                 (order.items || [])
                 .forEach(
                     (item,itemIndex) => {
 
-
                         const qty =
-                            item.quantity ||
-                            1;
-
+                            item.quantity || 1;
 
                         for (
-                            let i = 0;
-                            i < qty;
+                            let i=0;
+                            i<qty;
                             i++
                         ) {
-
 
                             order.drinks.push({
 
@@ -2696,8 +1730,7 @@ function updateToday() {
                                     "-" +
                                     i,
 
-                                name:
-                                    item.name,
+                                name: item.name,
 
                                 temp:
                                     item.temp ||
@@ -2707,8 +1740,7 @@ function updateToday() {
                                     item.discount ||
                                     "normal",
 
-                                completed:
-                                    false
+                                completed: false
 
                             });
 
@@ -2717,268 +1749,165 @@ function updateToday() {
                     }
                 );
 
-
-                changed =
-                    true;
+                changed = true;
             }
 
         }
     );
 
-
     if (changed) {
 
-        db[key] =
-            orders;
+        db[key] = orders;
 
         saveDatabase(db);
     }
 
-
-    /* 오늘 총매출 */
+    /* 오늘 매출 */
 
     const sales =
         orders.reduce(
-
             (sum,order) =>
                 sum +
-                Number(
-                    order.total || 0
-                ),
-
+                Number(order.total || 0),
             0
-
         );
-
 
     document.getElementById(
         "todaySales"
     ).textContent =
-
         sales.toLocaleString() +
         "원";
 
-
-    /* 제조 대기 수 */
+    /* 대기 음료 */
 
     let pending = 0;
 
+    orders.forEach(order => {
 
-    orders.forEach(
-        order => {
+        (order.drinks || [])
+        .forEach(drink => {
 
+            if (!drink.completed) {
+                pending++;
+            }
 
-            (order.drinks || [])
-            .forEach(
-                drink => {
+        });
 
-
-                    if (
-                        !drink.completed
-                    ) {
-
-                        pending++;
-                    }
-
-                }
-            );
-
-        }
-    );
-
+    });
 
     document.getElementById(
         "pendingCount"
     ).textContent =
-
         "대기 " +
         pending +
         "잔";
-
 
     const production =
         document.getElementById(
             "productionList"
         );
 
-
-    if (
-        !orders.length
-    ) {
+    if (!orders.length) {
 
         production.innerHTML =
-
-            '<div class="empty">' +
-            '제조 대기 주문이 없습니다' +
-            '</div>';
+            '<div class="empty">제조 대기 주문이 없습니다</div>';
 
         return;
     }
 
-
-    /*
-    먼저 주문한 팀부터 표시
-    */
-
     production.innerHTML =
-
         orders
-        .map(
-            order => {
+        .map(order => {
 
+            const drinks =
+                order.drinks || [];
 
-                const drinks =
-                    order.drinks || [];
+            const completed =
+                drinks.filter(
+                    x => x.completed
+                ).length;
 
+            const allCompleted =
+                drinks.length > 0 &&
+                completed === drinks.length;
 
-                const completed =
-                    drinks.filter(
+            const cards =
+                drinks
+                .map(drink => {
 
-                        drink =>
-                            drink.completed
+                    let discountText = "";
 
-                    ).length;
+                    if (
+                        drink.discount ===
+                        "senior"
+                    ) {
+                        discountText =
+                            "55세 이상 30%";
+                    }
 
+                    if (
+                        drink.discount ===
+                        "family"
+                    ) {
+                        discountText =
+                            "이웃가족 10%";
+                    }
 
-                const allCompleted =
+                    const temp =
+                        drink.temp === "ICE"
+                        ? "🧊 ICE"
+                        : "🔥 HOT";
 
-                    drinks.length > 0 &&
+                    return `
 
-                    completed ===
-                    drinks.length;
+                        <div
+                            class="drink-card ${drink.completed ? "completed" : ""}"
+                            onclick="toggleDrink(${order.id},'${drink.id}')"
+                        >
 
+                            <div class="drink-name">
+                                ${drink.name}
+                            </div>
 
-                const cards =
+                            <div class="drink-temp">
+                                ${temp}
+                            </div>
 
-                    drinks
-                    .map(
-                        drink => {
-
-
-                            let discountText =
-                                "";
-
-
-                            if (
-                                drink.discount ===
-                                "senior"
-                            ) {
-
-                                discountText =
-                                    "55세 이상 30%";
+                            ${
+                                discountText
+                                ?
+                                `
+                                <div class="drink-discount">
+                                    ${discountText}
+                                </div>
+                                `
+                                :
+                                ""
                             }
 
-
-                            if (
-                                drink.discount ===
-                                "family"
-                            ) {
-
-                                discountText =
-                                    "이웃가족 10%";
-                            }
-
-
-                            const temp =
-
-                                drink.temp ===
-                                "ICE"
-
-                                ? "🧊 ICE"
-
-                                : "🔥 HOT";
-
-
-                            return `
-
-                            <div
-                                class="
-                                    drink-card
-                                    ${
-                                        drink.completed
-                                        ? "completed"
-                                        : ""
-                                    }
-                                "
-
-                                onclick="
-                                    toggleDrink(
-                                        ${order.id},
-                                        '${drink.id}'
-                                    )
-                                "
-                            >
-
-
-                                <div class="drink-name">
-
-                                    ${drink.name}
-
-                                </div>
-
-
-                                <div class="drink-temp">
-
-                                    ${temp}
-
-                                </div>
-
+                            <div class="drink-status">
 
                                 ${
-                                    discountText
-                                    ?
-                                    `
-
-                                    <div class="drink-discount">
-
-                                        ${discountText}
-
-                                    </div>
-
-                                    `
-                                    :
-                                    ""
+                                    drink.completed
+                                    ? "✓ 제조 완료"
+                                    : "● 제조 대기"
                                 }
-
-
-                                <div class="drink-status">
-
-                                    ${
-                                        drink.completed
-
-                                        ? "✓ 제조 완료"
-
-                                        : "● 제조 대기"
-                                    }
-
-                                </div>
-
 
                             </div>
 
-                            `;
+                        </div>
+                    `;
 
-                        }
-                    )
-                    .join("");
+                })
+                .join("");
 
-
-                return `
+            return `
 
                 <div
-                    class="
-                        team-order
-                        ${
-                            allCompleted
-                            ? "all-completed"
-                            : ""
-                        }
-                    "
+                    class="team-order ${allCompleted ? "all-completed" : ""}"
                 >
 
-
                     <div class="team-header">
-
 
                         <div class="team-number">
 
@@ -2987,410 +1916,243 @@ function updateToday() {
                             ${
                                 allCompleted
                                 ?
-                                `
-
-                                <span class="team-complete-label">
-                                    ✓ 전체완료
-                                </span>
-
-                                `
+                                '<span class="team-complete-label">✓ 전체완료</span>'
                                 :
                                 ""
                             }
 
                         </div>
 
-
                         <div class="team-info">
 
-
                             <div class="team-time">
-
                                 ${order.time || ""}
-
                             </div>
-
 
                             <div class="team-price">
-
-                                ${
-                                    Number(
-                                        order.total ||
-                                        0
-                                    )
-                                    .toLocaleString()
-                                }원
-
+                                ${Number(order.total || 0).toLocaleString()}원
                             </div>
-
 
                         </div>
 
-
                     </div>
-
 
                     <div class="drink-grid">
-
                         ${cards}
-
                     </div>
-
 
                     <div class="team-bottom">
 
-
                         <div class="team-progress">
-
-                            제조 완료
-                            ${completed}
-                            /
-                            ${drinks.length}잔
-
+                            제조 완료 ${completed} / ${drinks.length}잔
                         </div>
-
 
                         <button
                             class="cancel-order"
-
-                            onclick="
-                                cancelOrder(
-                                    ${order.id},
-                                    ${order.orderNumber}
-                                )
-                            "
+                            onclick="cancelOrder(${order.id},${order.orderNumber})"
                         >
-
                             주문 취소
-
                         </button>
-
 
                     </div>
 
-
                 </div>
+            `;
 
-                `;
-
-            }
-        )
+        })
         .join("");
 }
 
 
-/* =========================
-   매출 기록 열기
-========================= */
+/* 매출 기록 */
 
 function openSalesHistory() {
 
     renderSalesHistory();
 
-
     document.getElementById(
         "salesModal"
-    ).classList.add(
-        "show"
-    );
+    ).classList.add("show");
 }
 
-
-/* =========================
-   매출 기록 닫기
-========================= */
 
 function closeSalesHistory() {
 
     document.getElementById(
         "salesModal"
-    ).classList.remove(
-        "show"
-    );
+    ).classList.remove("show");
 }
 
 
-function modalBackgroundClose(
-    event
-) {
+function modalBackgroundClose(event) {
 
     if (
         event.target.id ===
         "salesModal"
     ) {
-
         closeSalesHistory();
     }
 }
 
 
-/* =========================
-   날짜 표시
-========================= */
-
-function formatDate(
-    key
-) {
+function formatDate(key) {
 
     const parts =
         key.split("-");
 
-
     return (
-
         Number(parts[1]) +
         "월 " +
         Number(parts[2]) +
         "일"
-
     );
 }
 
 
-/* =========================
-   매출 기록
-========================= */
-
 function renderSalesHistory() {
 
-    const db =
-        getDatabase();
-
+    const db = getDatabase();
 
     const dates =
         Object.keys(db)
         .sort()
         .reverse();
 
-
     const container =
         document.getElementById(
             "salesHistoryList"
         );
 
-
-    if (
-        !dates.length
-    ) {
+    if (!dates.length) {
 
         container.innerHTML =
-
-            '<div class="empty">' +
-            '저장된 매출 기록이 없습니다' +
-            '</div>';
+            '<div class="empty">저장된 매출 기록이 없습니다</div>';
 
         return;
     }
 
-
     container.innerHTML =
-
         dates
-        .map(
-            (date,index) => {
+        .map((date,index) => {
 
+            const orders =
+                db[date] || [];
 
-                const orders =
-                    db[date] || [];
-
-
-                const totalSales =
-                    orders.reduce(
-
-                        (sum,order) =>
-                            sum +
-                            Number(
-                                order.total ||
-                                0
-                            ),
-
-                        0
-
-                    );
-
-
-                let drinkCount =
-                    0;
-
-
-                const menuCounts =
-                    {};
-
-
-                let seniorCount =
-                    0;
-
-
-                let familyCount =
-                    0;
-
-
-                orders.forEach(
-                    order => {
-
-
-                        (order.items || [])
-                        .forEach(
-                            item => {
-
-
-                                const qty =
-                                    Number(
-                                        item.quantity ||
-                                        1
-                                    );
-
-
-                                drinkCount +=
-                                    qty;
-
-
-                                menuCounts[
-                                    item.name
-                                ] =
-
-                                    (
-                                        menuCounts[
-                                            item.name
-                                        ] || 0
-                                    ) +
-
-                                    qty;
-
-
-                                if (
-                                    item.discount ===
-                                    "senior"
-                                ) {
-
-                                    seniorCount +=
-                                        qty;
-                                }
-
-
-                                if (
-                                    item.discount ===
-                                    "family"
-                                ) {
-
-                                    familyCount +=
-                                        qty;
-                                }
-
-                            }
-                        );
-
-                    }
+            const totalSales =
+                orders.reduce(
+                    (sum,order) =>
+                        sum +
+                        Number(order.total || 0),
+                    0
                 );
 
+            let drinkCount = 0;
 
-                const menuHTML =
+            const menuCounts = {};
 
-                    Object.entries(
-                        menuCounts
-                    )
-                    .map(
-                        ([name,count]) => `
+            let seniorCount = 0;
+            let familyCount = 0;
 
-                        <div class="detail-row">
+            orders.forEach(order => {
 
-                            <span>
-                                ${name}
-                            </span>
+                (order.items || [])
+                .forEach(item => {
 
-                            <strong>
-                                ${count}잔
-                            </strong>
+                    const qty =
+                        Number(
+                            item.quantity || 1
+                        );
 
-                        </div>
+                    drinkCount += qty;
 
-                        `
-                    )
-                    .join("");
+                    menuCounts[item.name] =
+                        (menuCounts[item.name] || 0) +
+                        qty;
 
+                    if (
+                        item.discount ===
+                        "senior"
+                    ) {
+                        seniorCount += qty;
+                    }
 
-                return `
+                    if (
+                        item.discount ===
+                        "family"
+                    ) {
+                        familyCount += qty;
+                    }
+
+                });
+
+            });
+
+            const menuHTML =
+                Object.entries(menuCounts)
+                .map(([name,count]) => `
+
+                    <div class="detail-row">
+
+                        <span>
+                            ${name}
+                        </span>
+
+                        <strong>
+                            ${count}잔
+                        </strong>
+
+                    </div>
+
+                `)
+                .join("");
+
+            return `
 
                 <div class="day-card">
 
-
                     <button
                         class="day-summary"
-
-                        onclick="
-                            toggleDayDetail(
-                                ${index}
-                            )
-                        "
+                        onclick="toggleDayDetail(${index})"
                     >
-
 
                         <div>
 
-
                             <div class="day-date">
-
                                 ${formatDate(date)}
-
                             </div>
-
 
                             <div class="day-count">
-
-                                주문
-                                ${orders.length}건
-
-                                ·
-
-                                판매
-                                ${drinkCount}잔
-
+                                주문 ${orders.length}건
+                                · 판매 ${drinkCount}잔
                             </div>
 
-
                         </div>
-
 
                         <div class="day-sales">
-
-                            ${
-                                totalSales
-                                .toLocaleString()
-                            }원
-
+                            ${totalSales.toLocaleString()}원
                         </div>
 
-
                     </button>
-
 
                     <div
                         class="day-detail"
                         id="dayDetail${index}"
                     >
 
-
                         <div class="detail-box">
-
 
                             <div class="detail-title">
                                 메뉴별 판매량
                             </div>
 
-
                             ${
                                 menuHTML ||
-
-                                '<div class="detail-row">' +
-                                '<span>판매 기록 없음</span>' +
-                                '</div>'
+                                '<div class="detail-row"><span>판매 기록 없음</span></div>'
                             }
-
 
                             <div class="detail-title">
                                 할인 사용
                             </div>
-
 
                             <div class="detail-row">
 
@@ -3404,7 +2166,6 @@ function renderSalesHistory() {
 
                             </div>
 
-
                             <div class="detail-row">
 
                                 <span>
@@ -3416,7 +2177,6 @@ function renderSalesHistory() {
                                 </strong>
 
                             </div>
-
 
                             <div class="detail-total">
 
@@ -3436,86 +2196,125 @@ function renderSalesHistory() {
 
                                 총매출
                                 <strong>
-                                    ${
-                                        totalSales
-                                        .toLocaleString()
-                                    }원
+                                    ${totalSales.toLocaleString()}원
                                 </strong>
 
                             </div>
 
+                            <button
+                                class="delete-day-btn"
+                                onclick="deleteDayRecord('${date}')"
+                            >
+                                🗑 ${formatDate(date)} 기록 삭제
+                            </button>
 
                         </div>
 
-
                     </div>
 
-
                 </div>
+            `;
 
-                `;
-
-            }
-        )
+        })
         .join("");
 }
 
 
-/* =========================
-   날짜 상세 열기
-========================= */
-
-function toggleDayDetail(
-    index
-) {
+function toggleDayDetail(index) {
 
     document.getElementById(
-
-        "dayDetail" +
-        index
-
-    ).classList.toggle(
-        "show"
-    );
+        "dayDetail" + index
+    ).classList.toggle("show");
 }
 
 
 /* =========================
-   오늘 기록 초기화
+   날짜별 기록 삭제
 ========================= */
 
-function resetToday() {
+function deleteDayRecord(date) {
+
+    const db = getDatabase();
+
+    const orders =
+        db[date] || [];
+
+    const totalSales =
+        orders.reduce(
+            (sum,order) =>
+                sum +
+                Number(order.total || 0),
+            0
+        );
 
     const answer =
         confirm(
-
-            "오늘 주문 기록과 총매출을 모두 삭제할까요?\n\n" +
-            "이 작업은 되돌릴 수 없습니다."
-
+            formatDate(date) +
+            "의 기록을 모두 삭제할까요?\n\n" +
+            "주문 " +
+            orders.length +
+            "건 · " +
+            totalSales.toLocaleString() +
+            "원\n\n" +
+            "삭제한 기록은 복구할 수 없습니다."
         );
-
 
     if (!answer) {
         return;
     }
 
-
-    const db =
-        getDatabase();
-
-
-    delete db[
-        todayKey()
-    ];
-
+    delete db[date];
 
     saveDatabase(db);
 
+    /*
+    삭제한 날짜가 오늘이면
+    오늘 화면도 즉시 갱신
+    */
+
+    if (date === todayKey()) {
+
+        updateToday();
+
+        updateNextCustomer();
+    }
+
+    /*
+    매출 기록 창 다시 그리기
+    */
+
+    renderSalesHistory();
+
+    showToast(
+        formatDate(date) +
+        " 기록 삭제 완료"
+    );
+}
+
+
+/* 오늘 전체 초기화 */
+
+function resetToday() {
+
+    const answer =
+        confirm(
+            "오늘 주문 기록과 총매출을 모두 삭제할까요?\n\n" +
+            "이 작업은 되돌릴 수 없습니다."
+        );
+
+    if (!answer) {
+        return;
+    }
+
+    const db = getDatabase();
+
+    delete db[todayKey()];
+
+    saveDatabase(db);
 
     updateToday();
 
     updateNextCustomer();
-
 
     showToast(
         "오늘 기록 초기화"
@@ -3523,48 +2322,31 @@ function resetToday() {
 }
 
 
-/* =========================
-   알림
-========================= */
+/* 알림 */
 
 let toastTimer;
 
 
-function showToast(
-    message
-) {
+function showToast(message) {
 
     const toast =
         document.getElementById(
             "toast"
         );
 
-
     toast.textContent =
         message;
 
+    toast.classList.add("show");
 
-    toast.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        toastTimer
-    );
-
+    clearTimeout(toastTimer);
 
     toastTimer =
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                toast.classList.remove(
-                    "show"
-                );
+            toast.classList.remove("show");
 
-            },
-            900
-        );
+        },900);
 }
 
 
@@ -3572,104 +2354,66 @@ function showToast(
    iPad 확대 방지
 ========================= */
 
-/*
-더블탭 확대 방지
-*/
-
 let lastTouchEnd = 0;
 
-
 document.addEventListener(
-
     "touchend",
-
     function(event) {
 
         const now =
             Date.now();
-
 
         if (
             now -
             lastTouchEnd <=
             300
         ) {
-
             event.preventDefault();
         }
 
-
-        lastTouchEnd =
-            now;
+        lastTouchEnd = now;
 
     },
-
     {
         passive:false
     }
-
 );
 
 
-/*
-iPad Safari
-두 손가락 확대 방지
-*/
-
 document.addEventListener(
-
     "gesturestart",
-
     function(event) {
-
         event.preventDefault();
-
     },
-
     {
         passive:false
     }
-
 );
 
 
 document.addEventListener(
-
     "gesturechange",
-
     function(event) {
-
         event.preventDefault();
-
     },
-
     {
         passive:false
     }
-
 );
 
 
 document.addEventListener(
-
     "gestureend",
-
     function(event) {
-
         event.preventDefault();
-
     },
-
     {
         passive:false
     }
-
 );
 
 
-/* =========================
-   시작
-========================= */
+/* 시작 */
 
 renderOrder();
 
