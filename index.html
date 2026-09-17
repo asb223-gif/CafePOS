@@ -151,6 +151,63 @@ header {
     color: #777;
 }
 
+
+/* 제조 레시피 */
+
+.recipe-section {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 2px solid #eeeeea;
+}
+
+.recipe-title {
+    margin: 0 0 10px;
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.recipe-scroll {
+    height: 280px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 5px;
+    touch-action: pan-y;
+    overscroll-behavior: contain;
+}
+
+.recipe-card {
+    background: #f5f7f3;
+    border: 1px solid #e1e6df;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 9px;
+}
+
+.recipe-name {
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 9px;
+}
+
+.recipe-step {
+    background: white;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.recipe-arrow {
+    text-align: center;
+    color: #8b9b91;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.recipe-temp-hot { color: #a0523f; }
+.recipe-temp-ice { color: #397ba9; }
+
 /* 현재 주문 */
 
 .order-header {
@@ -865,6 +922,45 @@ header {
                 <div class="menu-price">5,000원 · HOT</div>
             </button>
 
+        </div>
+
+
+        <div class="recipe-section">
+            <h3 class="recipe-title">📖 제조 레시피</h3>
+
+            <div class="recipe-scroll">
+                <div class="recipe-card">
+                    <div class="recipe-name">
+                        ☕ 아메리카노
+                        <span class="recipe-temp-hot">· HOT</span>
+                    </div>
+                    <div class="recipe-step">물 220ml</div>
+                    <div class="recipe-arrow">↓</div>
+                    <div class="recipe-step">에스프레소 2샷</div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-name">
+                        🥛 카페라떼
+                        <span class="recipe-temp-hot">· HOT</span>
+                    </div>
+                    <div class="recipe-step">우유 220ml</div>
+                    <div class="recipe-arrow">↓</div>
+                    <div class="recipe-step">에스프레소 2샷</div>
+                </div>
+
+                <div class="recipe-card">
+                    <div class="recipe-name">
+                        🧊 카페라떼
+                        <span class="recipe-temp-ice">· ICE</span>
+                    </div>
+                    <div class="recipe-step">얼음 가득</div>
+                    <div class="recipe-arrow">↓</div>
+                    <div class="recipe-step">우유 160ml</div>
+                    <div class="recipe-arrow">↓</div>
+                    <div class="recipe-step">에스프레소 2샷</div>
+                </div>
+            </div>
         </div>
 
     </section>
@@ -2353,32 +2449,6 @@ function showToast(message) {
 /* =========================
    iPad 확대 방지
 ========================= */
-
-let lastTouchEnd = 0;
-
-document.addEventListener(
-    "touchend",
-    function(event) {
-
-        const now =
-            Date.now();
-
-        if (
-            now -
-            lastTouchEnd <=
-            300
-        ) {
-            event.preventDefault();
-        }
-
-        lastTouchEnd = now;
-
-    },
-    {
-        passive:false
-    }
-);
-
 
 document.addEventListener(
     "gesturestart",
