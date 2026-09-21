@@ -847,6 +847,70 @@ header {
         grid-template-columns: repeat(3,1fr);
     }
 }
+
+/* 메뉴 관리 */
+.menu-manage-btn {
+    width: 100%;
+    height: 42px;
+    margin: 0 0 12px;
+    border: 0;
+    border-radius: 10px;
+    background: #edf4ef;
+    color: #294c39;
+    font-weight: 900;
+}
+.menu-admin-row {
+    background: white;
+    border: 1px solid #e5e7e3;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 9px;
+}
+.menu-admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 130px;
+    gap: 8px;
+}
+.menu-admin-grid input, .menu-admin-grid select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #d8ddd8;
+    border-radius: 8px;
+    padding: 0 10px;
+    font: inherit;
+}
+.menu-admin-actions {
+    display: flex;
+    gap: 7px;
+    margin-top: 8px;
+}
+.menu-admin-actions button, .add-menu-btn {
+    flex: 1;
+    height: 38px;
+    border: 0;
+    border-radius: 8px;
+    font-weight: 800;
+}
+.menu-save-btn, .add-menu-btn { background: #294c39; color: white; }
+.menu-remove-btn { background: #fff0f0; color: #a13d3d; }
+
+
+.menu-manage-top-btn {
+    height: 54px;
+    padding: 0 18px;
+    border: 1px solid #dfe7df;
+    border-radius: 12px;
+    background: #edf4ef;
+    color: #294c39;
+    font-weight: 900;
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.menu-manage-top-btn:active {
+    transform: scale(.98);
+}
+
 </style>
 </head>
 
@@ -869,6 +933,10 @@ header {
             <div id="todaySales">0원</div>
         </div>
 
+        <button class="menu-manage-top-btn" onclick="openMenuManager()">
+            ⚙️ 메뉴 관리
+        </button>
+
     </div>
 </header>
 
@@ -879,51 +947,7 @@ header {
     <section class="panel">
 
         <h2 class="panel-title">메뉴</h2>
-
-        <div class="menu-grid">
-
-            <button
-                class="menu"
-                onclick="addItem('아메리카노',4000,true)"
-            >
-                <div class="menu-name">☕ 아메리카노</div>
-                <div class="menu-price">4,000원</div>
-            </button>
-
-            <button
-                class="menu"
-                onclick="addItem('카페라떼',5000,true)"
-            >
-                <div class="menu-name">🥛 카페라떼</div>
-                <div class="menu-price">5,000원</div>
-            </button>
-
-            <button
-                class="menu"
-                onclick="addItem('한방차',9000,false)"
-            >
-                <div class="menu-name">🍵 한방차</div>
-                <div class="menu-price">9,000원 · HOT</div>
-            </button>
-
-            <button
-                class="menu"
-                onclick="addItem('캐모마일',5000,false)"
-            >
-                <div class="menu-name">🌼 캐모마일</div>
-                <div class="menu-price">5,000원 · HOT</div>
-            </button>
-
-            <button
-                class="menu"
-                onclick="addItem('페퍼민트',5000,false)"
-            >
-                <div class="menu-name">🌿 페퍼민트</div>
-                <div class="menu-price">5,000원 · HOT</div>
-            </button>
-
-        </div>
-
+<div class="menu-grid" id="menuGrid"></div>
 
         <div class="recipe-section">
             <h3 class="recipe-title">📖 제조 레시피</h3>
@@ -1035,6 +1059,21 @@ header {
 
 </div>
 
+
+<!-- 메뉴 관리 -->
+<div class="modal" id="menuModal" onclick="menuModalBackgroundClose(event)">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2>⚙️ 메뉴 관리</h2>
+            <button class="close-btn" onclick="closeMenuManager()">×</button>
+        </div>
+        <div class="sales-list">
+            <div id="menuAdminList"></div>
+            <button class="add-menu-btn" onclick="addNewMenu()">＋ 새 메뉴 추가</button>
+        </div>
+    </div>
+</div>
+
 <!-- 매출 기록 -->
 
 <div
@@ -1098,9 +1137,31 @@ header {
     id="toast"
 ></div>
 
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+
 <script>
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBRgaDpgV6908kmiE4Cui-nEtXWsEMSHMw",
+  authDomain: "cafepos-7eb83.firebaseapp.com",
+  databaseURL: "https://cafepos-7eb83-default-rtdb.firebaseio.com",
+  projectId: "cafepos-7eb83",
+  storageBucket: "cafepos-7eb83.firebasestorage.app",
+  messagingSenderId: "515202249636",
+  appId: "1:515202249636:web:79579c379411675b158731"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const remoteDB = firebase.database();
+
+let firebaseReady = false;
 let currentOrder = [];
+
 
 
 /* 날짜 */
@@ -1120,26 +1181,186 @@ function todayKey() {
 /* 저장 */
 
 function getDatabase() {
-
     try {
-
-        return JSON.parse(
-            localStorage.getItem("cafePOS") || "{}"
-        );
-
+        return JSON.parse(localStorage.getItem("cafePOS") || "{}");
     } catch {
-
         return {};
     }
 }
 
+function saveLocalDatabase(db) {
+    localStorage.setItem("cafePOS", JSON.stringify(db));
+}
 
 function saveDatabase(db) {
+    saveLocalDatabase(db);
+    if (firebaseReady && auth.currentUser) {
+        remoteDB.ref("cafePOS").set(db).catch(err => {
+            console.error("Firebase 저장 오류:", err);
+            showToast("온라인 저장 오류 · 기기에 저장됨");
+        });
+    }
+}
 
-    localStorage.setItem(
-        "cafePOS",
-        JSON.stringify(db)
-    );
+function applyRemoteDatabase(value) {
+    const db = value && typeof value === "object" ? value : {};
+    saveLocalDatabase(db);
+    updateToday();
+    updateNextCustomer();
+    if (document.getElementById("salesModal").classList.contains("show")) {
+        renderSalesHistory();
+    }
+}
+
+async function startFirebase() {
+    try {
+        await auth.signInAnonymously();
+        firebaseReady = true;
+
+        const menuRef = remoteDB.ref("settings/menus");
+        const menuSnap = await menuRef.once("value");
+        if (menuSnap.exists() && Array.isArray(menuSnap.val())) {
+            localStorage.setItem("cafePOSMenus", JSON.stringify(menuSnap.val()));
+            renderMenus();
+        } else {
+            await menuRef.set(getMenus());
+        }
+        menuRef.on("value", snapshot => {
+            if (snapshot.exists() && Array.isArray(snapshot.val())) {
+                localStorage.setItem("cafePOSMenus", JSON.stringify(snapshot.val()));
+                renderMenus();
+                if (document.getElementById("menuModal").classList.contains("show")) renderMenuManager();
+            }
+        });
+
+        const ref = remoteDB.ref("cafePOS");
+        const snap = await ref.once("value");
+
+        if (snap.exists()) {
+            applyRemoteDatabase(snap.val());
+        } else {
+            const local = getDatabase();
+            if (Object.keys(local).length) {
+                await ref.set(local);
+            }
+        }
+
+        ref.on("value", snapshot => {
+            if (snapshot.exists()) {
+                applyRemoteDatabase(snapshot.val());
+            } else {
+                applyRemoteDatabase({});
+            }
+        });
+
+        showToast("온라인 동기화 연결됨");
+    } catch (err) {
+        console.error("Firebase 연결 오류:", err);
+        showToast("오프라인 모드 · 이 기기에 저장");
+    }
+}
+
+
+
+const DEFAULT_MENUS = [
+    {id:"americano", name:"아메리카노", price:4000, tempChoice:true, emoji:"☕"},
+    {id:"latte", name:"카페라떼", price:5000, tempChoice:true, emoji:"🥛"},
+    {id:"herbal", name:"한방차", price:9000, tempChoice:false, emoji:"🍵"},
+    {id:"chamomile", name:"캐모마일", price:5000, tempChoice:false, emoji:"🌼"},
+    {id:"peppermint", name:"페퍼민트", price:5000, tempChoice:false, emoji:"🌿"}
+];
+
+function getMenus() {
+    try {
+        const saved = JSON.parse(localStorage.getItem("cafePOSMenus") || "null");
+        return Array.isArray(saved) && saved.length ? saved : DEFAULT_MENUS.map(x => ({...x}));
+    } catch {
+        return DEFAULT_MENUS.map(x => ({...x}));
+    }
+}
+
+function saveMenus(menus) {
+    localStorage.setItem("cafePOSMenus", JSON.stringify(menus));
+    renderMenus();
+    if (firebaseReady && auth.currentUser) {
+        remoteDB.ref("settings/menus").set(menus).catch(console.error);
+    }
+}
+
+function renderMenus() {
+    const menus = getMenus();
+    document.getElementById("menuGrid").innerHTML = menus.map((m, i) => `
+        <button class="menu" onclick="addItem(${JSON.stringify(m.name)},${Number(m.price)},${!!m.tempChoice})">
+            <div class="menu-name">${m.emoji || "☕"} ${m.name}</div>
+            <div class="menu-price">${Number(m.price).toLocaleString()}원${m.tempChoice ? "" : " · HOT"}</div>
+        </button>
+    `).join("");
+}
+
+function openMenuManager() {
+    renderMenuManager();
+    document.getElementById("menuModal").classList.add("show");
+}
+function closeMenuManager() {
+    document.getElementById("menuModal").classList.remove("show");
+}
+function menuModalBackgroundClose(event) {
+    if (event.target.id === "menuModal") closeMenuManager();
+}
+function renderMenuManager() {
+    const menus = getMenus();
+    document.getElementById("menuAdminList").innerHTML = menus.map((m,i) => `
+        <div class="menu-admin-row">
+            <div class="menu-admin-grid">
+                <input id="menuName${i}" value="${String(m.name).replace(/"/g,"&quot;")}" placeholder="메뉴 이름">
+                <input id="menuPrice${i}" type="number" min="0" step="100" value="${Number(m.price)}" placeholder="가격">
+                <input id="menuEmoji${i}" value="${String(m.emoji || "")}" placeholder="아이콘">
+                <select id="menuTemp${i}">
+                    <option value="choice" ${m.tempChoice ? "selected" : ""}>ICE / HOT 선택</option>
+                    <option value="hot" ${!m.tempChoice ? "selected" : ""}>HOT 전용</option>
+                </select>
+            </div>
+            <div class="menu-admin-actions">
+                <button class="menu-save-btn" onclick="saveMenuEdit(${i})">저장</button>
+                <button class="menu-remove-btn" onclick="removeMenu(${i})">삭제</button>
+            </div>
+        </div>
+    `).join("");
+}
+function saveMenuEdit(index) {
+    const menus = getMenus();
+    const name = document.getElementById("menuName"+index).value.trim();
+    const price = Number(document.getElementById("menuPrice"+index).value);
+    if (!name || !Number.isFinite(price) || price < 0) {
+        alert("메뉴 이름과 가격을 확인해주세요.");
+        return;
+    }
+    menus[index].name = name;
+    menus[index].price = price;
+    menus[index].emoji = document.getElementById("menuEmoji"+index).value.trim() || "☕";
+    menus[index].tempChoice = document.getElementById("menuTemp"+index).value === "choice";
+    saveMenus(menus);
+    renderMenuManager();
+    showToast("메뉴 저장 완료");
+}
+function removeMenu(index) {
+    const menus = getMenus();
+    if (!confirm(`'${menus[index].name}' 메뉴를 삭제할까요?`)) return;
+    menus.splice(index,1);
+    saveMenus(menus);
+    renderMenuManager();
+}
+function addNewMenu() {
+    const menus = getMenus();
+    menus.push({
+        id: "menu_" + Date.now(),
+        name: "새 메뉴",
+        price: 0,
+        tempChoice: true,
+        emoji: "☕"
+    });
+    saveMenus(menus);
+    renderMenuManager();
 }
 
 
@@ -2484,6 +2705,9 @@ document.addEventListener(
 
 
 /* 시작 */
+
+renderMenus();
+startFirebase();
 
 renderOrder();
 
