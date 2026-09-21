@@ -911,6 +911,93 @@ header {
     transform: scale(.98);
 }
 
+
+/* 접이식 제조 레시피 */
+.recipe-section {
+    margin-top: 18px;
+    padding-top: 0;
+    border-top: 2px solid #eeeeea;
+}
+.recipe-toggle {
+    width: 100%;
+    min-height: 48px;
+    border: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 2px 8px;
+    font-size: 17px;
+    font-weight: 900;
+    color: #222;
+}
+.recipe-toggle-arrow {
+    font-size: 18px;
+    transition: transform .18s ease;
+}
+.recipe-toggle.open .recipe-toggle-arrow {
+    transform: rotate(180deg);
+}
+.recipe-content {
+    display: none;
+}
+.recipe-content.show {
+    display: block;
+}
+.recipe-scroll {
+    height: 280px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 5px;
+    touch-action: pan-y;
+    overscroll-behavior: contain;
+}
+.admin-section-title {
+    margin: 22px 0 10px;
+    padding-top: 18px;
+    border-top: 2px solid #e5e7e3;
+    font-size: 17px;
+    font-weight: 900;
+}
+.recipe-admin-row {
+    background: white;
+    border: 1px solid #e5e7e3;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 9px;
+}
+.recipe-admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 130px;
+    gap: 8px;
+}
+.recipe-admin-grid input,
+.recipe-admin-grid select,
+.recipe-admin-grid textarea {
+    width: 100%;
+    border: 1px solid #d8ddd8;
+    border-radius: 8px;
+    padding: 9px 10px;
+    font: inherit;
+    background: white;
+}
+.recipe-admin-grid input,
+.recipe-admin-grid select {
+    height: 40px;
+}
+.recipe-admin-grid textarea {
+    min-height: 92px;
+    resize: vertical;
+    grid-column: 1 / -1;
+    line-height: 1.5;
+}
+.recipe-admin-help {
+    grid-column: 1 / -1;
+    color: #777;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
 </style>
 </head>
 
@@ -950,40 +1037,13 @@ header {
 <div class="menu-grid" id="menuGrid"></div>
 
         <div class="recipe-section">
-            <h3 class="recipe-title">📖 제조 레시피</h3>
+            <button class="recipe-toggle" id="recipeToggle" onclick="toggleRecipes()">
+                <span>📖 제조 레시피</span>
+                <span class="recipe-toggle-arrow">⌄</span>
+            </button>
 
-            <div class="recipe-scroll">
-                <div class="recipe-card">
-                    <div class="recipe-name">
-                        ☕ 아메리카노
-                        <span class="recipe-temp-hot">· HOT</span>
-                    </div>
-                    <div class="recipe-step">물 220ml</div>
-                    <div class="recipe-arrow">↓</div>
-                    <div class="recipe-step">에스프레소 2샷</div>
-                </div>
-
-                <div class="recipe-card">
-                    <div class="recipe-name">
-                        🥛 카페라떼
-                        <span class="recipe-temp-hot">· HOT</span>
-                    </div>
-                    <div class="recipe-step">우유 220ml</div>
-                    <div class="recipe-arrow">↓</div>
-                    <div class="recipe-step">에스프레소 2샷</div>
-                </div>
-
-                <div class="recipe-card">
-                    <div class="recipe-name">
-                        🧊 카페라떼
-                        <span class="recipe-temp-ice">· ICE</span>
-                    </div>
-                    <div class="recipe-step">얼음 가득</div>
-                    <div class="recipe-arrow">↓</div>
-                    <div class="recipe-step">우유 160ml</div>
-                    <div class="recipe-arrow">↓</div>
-                    <div class="recipe-step">에스프레소 2샷</div>
-                </div>
+            <div class="recipe-content" id="recipeContent">
+                <div class="recipe-scroll" id="recipeList"></div>
             </div>
         </div>
 
@@ -1070,6 +1130,10 @@ header {
         <div class="sales-list">
             <div id="menuAdminList"></div>
             <button class="add-menu-btn" onclick="addNewMenu()">＋ 새 메뉴 추가</button>
+
+            <div class="admin-section-title">📖 제조 레시피 관리</div>
+            <div id="recipeAdminList"></div>
+            <button class="add-menu-btn" onclick="addNewRecipe()">＋ 새 레시피 추가</button>
         </div>
     </div>
 </div>
@@ -1254,6 +1318,22 @@ async function startFirebase() {
             }
         });
 
+        const recipeRef = remoteDB.ref("settings/recipes");
+        const recipeSnap = await recipeRef.once("value");
+        if (recipeSnap.exists() && Array.isArray(recipeSnap.val())) {
+            localStorage.setItem("cafePOSRecipes", JSON.stringify(recipeSnap.val()));
+            renderRecipes();
+        } else {
+            await recipeRef.set(getRecipes());
+        }
+        recipeRef.on("value", snapshot => {
+            if (snapshot.exists() && Array.isArray(snapshot.val())) {
+                localStorage.setItem("cafePOSRecipes", JSON.stringify(snapshot.val()));
+                renderRecipes();
+                if (document.getElementById("menuModal").classList.contains("show")) renderRecipeManager();
+            }
+        });
+
         const ref = remoteDB.ref("cafePOS");
         const snap = await ref.once("value");
 
@@ -1349,9 +1429,142 @@ function addMenuByIndex(index) {
     );
 }
 
+
+const DEFAULT_RECIPES = [
+    {id:"americano_hot", name:"아메리카노", emoji:"☕", temp:"HOT", steps:["물 220ml","에스프레소 2샷"]},
+    {id:"latte_hot", name:"카페라떼", emoji:"🥛", temp:"HOT", steps:["우유 220ml","에스프레소 2샷"]},
+    {id:"latte_ice", name:"카페라떼", emoji:"🧊", temp:"ICE", steps:["얼음 가득","우유 160ml","에스프레소 2샷"]}
+];
+
+function getRecipes() {
+    try {
+        const saved = JSON.parse(localStorage.getItem("cafePOSRecipes") || "null");
+        return Array.isArray(saved) && saved.length
+            ? saved
+            : DEFAULT_RECIPES.map(r => ({...r, steps:[...r.steps]}));
+    } catch {
+        return DEFAULT_RECIPES.map(r => ({...r, steps:[...r.steps]}));
+    }
+}
+
+function saveRecipes(recipes) {
+    localStorage.setItem("cafePOSRecipes", JSON.stringify(recipes));
+    renderRecipes();
+    if (firebaseReady && auth.currentUser) {
+        remoteDB.ref("settings/recipes").set(recipes).catch(console.error);
+    }
+}
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+}
+
+function renderRecipes() {
+    const target = document.getElementById("recipeList");
+    if (!target) return;
+
+    const recipes = getRecipes();
+    target.innerHTML = recipes.map(r => {
+        const temp = String(r.temp || "").toUpperCase();
+        const tempClass = temp === "ICE" ? "recipe-temp-ice" : "recipe-temp-hot";
+        const steps = Array.isArray(r.steps) ? r.steps : [];
+        return `
+            <div class="recipe-card">
+                <div class="recipe-name">
+                    ${escapeHTML(r.emoji || "☕")} ${escapeHTML(r.name)}
+                    ${temp ? `<span class="${tempClass}">· ${escapeHTML(temp)}</span>` : ""}
+                </div>
+                ${steps.map((step, i) => `
+                    <div class="recipe-step">${escapeHTML(step)}</div>
+                    ${i < steps.length - 1 ? '<div class="recipe-arrow">↓</div>' : ''}
+                `).join("")}
+            </div>`;
+    }).join("") || '<div style="padding:12px;color:#888;font-size:13px">등록된 레시피가 없습니다.</div>';
+}
+
+function toggleRecipes() {
+    const content = document.getElementById("recipeContent");
+    const toggle = document.getElementById("recipeToggle");
+    const willOpen = !content.classList.contains("show");
+    content.classList.toggle("show", willOpen);
+    toggle.classList.toggle("open", willOpen);
+}
+
+function renderRecipeManager() {
+    const target = document.getElementById("recipeAdminList");
+    if (!target) return;
+
+    const recipes = getRecipes();
+    target.innerHTML = recipes.map((r, i) => `
+        <div class="recipe-admin-row">
+            <div class="recipe-admin-grid">
+                <input id="recipeName${i}" value="${escapeHTML(r.name)}" placeholder="레시피 이름">
+                <select id="recipeTemp${i}">
+                    <option value="HOT" ${String(r.temp).toUpperCase()==="HOT" ? "selected" : ""}>HOT</option>
+                    <option value="ICE" ${String(r.temp).toUpperCase()==="ICE" ? "selected" : ""}>ICE</option>
+                    <option value="" ${!r.temp ? "selected" : ""}>온도 표시 없음</option>
+                </select>
+                <input id="recipeEmoji${i}" value="${escapeHTML(r.emoji || "")}" placeholder="아이콘">
+                <div class="recipe-admin-help">아래 칸에 제조 순서를 한 줄에 하나씩 입력하면 현재 레시피 카드 레이아웃으로 표시됩니다.</div>
+                <textarea id="recipeSteps${i}" placeholder="예:&#10;얼음 가득&#10;우유 160ml&#10;에스프레소 2샷">${escapeHTML((r.steps || []).join("\n"))}</textarea>
+            </div>
+            <div class="menu-admin-actions">
+                <button class="menu-save-btn" onclick="saveRecipeEdit(${i})">저장</button>
+                <button class="menu-remove-btn" onclick="removeRecipe(${i})">삭제</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function saveRecipeEdit(index) {
+    const recipes = getRecipes();
+    const name = document.getElementById("recipeName"+index).value.trim();
+    const steps = document.getElementById("recipeSteps"+index).value
+        .split("\n").map(v => v.trim()).filter(Boolean);
+
+    if (!name || !steps.length) {
+        alert("레시피 이름과 제조 순서를 입력해주세요.");
+        return;
+    }
+
+    recipes[index].name = name;
+    recipes[index].emoji = document.getElementById("recipeEmoji"+index).value.trim() || "☕";
+    recipes[index].temp = document.getElementById("recipeTemp"+index).value;
+    recipes[index].steps = steps;
+    saveRecipes(recipes);
+    renderRecipeManager();
+    showToast("레시피 저장 완료");
+}
+
+function removeRecipe(index) {
+    const recipes = getRecipes();
+    if (!confirm(`'${recipes[index].name}' 레시피를 삭제할까요?`)) return;
+    recipes.splice(index, 1);
+    saveRecipes(recipes);
+    renderRecipeManager();
+}
+
+function addNewRecipe() {
+    const recipes = getRecipes();
+    recipes.push({
+        id: "recipe_" + Date.now(),
+        name: "새 레시피",
+        emoji: "☕",
+        temp: "HOT",
+        steps: ["재료/순서 1", "재료/순서 2"]
+    });
+    saveRecipes(recipes);
+    renderRecipeManager();
+}
+
 function openMenuManager() {
     if (!requestAdminPin("메뉴 관리를 열려면 관리자 PIN을 입력해주세요.")) return;
     renderMenuManager();
+    renderRecipeManager();
     document.getElementById("menuModal").classList.add("show");
 }
 function closeMenuManager() {
@@ -2767,6 +2980,7 @@ document.addEventListener(
 /* 시작 */
 
 renderMenus();
+renderRecipes();
 startFirebase();
 
 renderOrder();
