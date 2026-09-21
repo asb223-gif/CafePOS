@@ -1273,13 +1273,28 @@ const DEFAULT_MENUS = [
 function getMenus() {
     try {
         const saved = JSON.parse(localStorage.getItem("cafePOSMenus") || "null");
-        return Array.isArray(saved) && saved.length ? saved : DEFAULT_MENUS.map(x => ({...x}));
+        const source = Array.isArray(saved) && saved.length
+            ? saved
+            : DEFAULT_MENUS.map(x => ({...x}));
+
+        return source.map(m => ({
+            ...m,
+            tempMode: m.tempMode || (m.tempChoice === false ? "hot" : "choice")
+        }));
     } catch {
-        return DEFAULT_MENUS.map(x => ({...x}));
+        return DEFAULT_MENUS.map(x => ({
+            ...x,
+            tempMode: x.tempChoice === false ? "hot" : "choice"
+        }));
     }
 }
 
 function saveMenus(menus) {
+    menus = menus.map(m => ({
+        ...m,
+        tempMode: m.tempMode || (m.tempChoice === false ? "hot" : "choice"),
+        tempChoice: (m.tempMode || (m.tempChoice === false ? "hot" : "choice")) === "choice"
+    }));
     localStorage.setItem("cafePOSMenus", JSON.stringify(menus));
     renderMenus();
     if (firebaseReady && auth.currentUser) {
@@ -1289,12 +1304,28 @@ function saveMenus(menus) {
 
 function renderMenus() {
     const menus = getMenus();
-    document.getElementById("menuGrid").innerHTML = menus.map((m, i) => `
-        <button class="menu" onclick="addItem(${JSON.stringify(m.name)},${Number(m.price)},${!!m.tempChoice})">
+    document.getElementById("menuGrid").innerHTML = menus.map((m, i) => {
+        const mode = m.tempMode || "choice";
+        const suffix = mode === "hot" ? " · HOT" : mode === "ice" ? " · ICE" : "";
+        return `
+        <button class="menu" onclick="addMenuByIndex(${i})">
             <div class="menu-name">${m.emoji || "☕"} ${m.name}</div>
-            <div class="menu-price">${Number(m.price).toLocaleString()}원${m.tempChoice ? "" : " · HOT"}</div>
-        </button>
-    `).join("");
+            <div class="menu-price">${Number(m.price).toLocaleString()}원${suffix}</div>
+        </button>`;
+    }).join("");
+}
+
+function addMenuByIndex(index) {
+    const m = getMenus()[index];
+    if (!m) return;
+
+    const mode = m.tempMode || "choice";
+    addItem(
+        m.name,
+        Number(m.price),
+        mode === "choice",
+        mode === "ice" ? "ICE" : "HOT"
+    );
 }
 
 function openMenuManager() {
@@ -1316,8 +1347,9 @@ function renderMenuManager() {
                 <input id="menuPrice${i}" type="number" min="0" step="100" value="${Number(m.price)}" placeholder="가격">
                 <input id="menuEmoji${i}" value="${String(m.emoji || "")}" placeholder="아이콘">
                 <select id="menuTemp${i}">
-                    <option value="choice" ${m.tempChoice ? "selected" : ""}>ICE / HOT 선택</option>
-                    <option value="hot" ${!m.tempChoice ? "selected" : ""}>HOT 전용</option>
+                    <option value="choice" ${(m.tempMode || (m.tempChoice === false ? "hot" : "choice")) === "choice" ? "selected" : ""}>ICE / HOT 선택</option>
+                    <option value="hot" ${(m.tempMode || (m.tempChoice === false ? "hot" : "choice")) === "hot" ? "selected" : ""}>HOT 전용</option>
+                    <option value="ice" ${(m.tempMode || "") === "ice" ? "selected" : ""}>ICE 전용</option>
                 </select>
             </div>
             <div class="menu-admin-actions">
@@ -1338,7 +1370,8 @@ function saveMenuEdit(index) {
     menus[index].name = name;
     menus[index].price = price;
     menus[index].emoji = document.getElementById("menuEmoji"+index).value.trim() || "☕";
-    menus[index].tempChoice = document.getElementById("menuTemp"+index).value === "choice";
+    menus[index].tempMode = document.getElementById("menuTemp"+index).value;
+    menus[index].tempChoice = menus[index].tempMode === "choice";
     saveMenus(menus);
     renderMenuManager();
     showToast("메뉴 저장 완료");
@@ -1357,6 +1390,7 @@ function addNewMenu() {
         name: "새 메뉴",
         price: 0,
         tempChoice: true,
+        tempMode: "choice",
         emoji: "☕"
     });
     saveMenus(menus);
@@ -1366,14 +1400,14 @@ function addNewMenu() {
 
 /* 메뉴 */
 
-function addItem(name, price, tempChoice) {
+function addItem(name, price, tempChoice, forcedTemp = "HOT") {
 
     if (!tempChoice) {
 
         const existing =
             currentOrder.find(item =>
                 item.name === name &&
-                item.temp === "HOT" &&
+                item.temp === forcedTemp &&
                 item.discount === "normal"
             );
 
@@ -1411,7 +1445,7 @@ function addItem(name, price, tempChoice) {
         name: name,
         basePrice: price,
         tempChoice: tempChoice,
-        temp: tempChoice ? "" : "HOT",
+        temp: tempChoice ? "" : forcedTemp,
         discount: "normal",
         quantity: 1
 
@@ -1606,7 +1640,9 @@ function renderOrder() {
             } else {
 
                 tempHTML =
-                    '<div class="hot-only">🔥 HOT 전용</div>';
+                    item.temp === "ICE"
+                    ? '<div class="hot-only" style="color:#397ba9">🧊 ICE 전용</div>'
+                    : '<div class="hot-only">🔥 HOT 전용</div>';
             }
 
             return `
