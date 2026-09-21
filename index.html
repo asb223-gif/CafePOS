@@ -934,7 +934,7 @@ header {
         </div>
 
         <button class="menu-manage-top-btn" onclick="openMenuManager()">
-            ⚙️ 메뉴 관리
+            🔒 메뉴 관리
         </button>
 
     </div>
@@ -1162,6 +1162,27 @@ const remoteDB = firebase.database();
 let firebaseReady = false;
 let currentOrder = [];
 
+/* 관리자 잠금
+   초기 PIN: 2580
+   직원 실수 방지용 잠금입니다. */
+const ADMIN_PIN = "2580";
+let adminUnlocked = false;
+
+function requestAdminPin(message = "관리자 PIN을 입력해주세요.") {
+    if (adminUnlocked) return true;
+
+    const entered = prompt(message);
+    if (entered === null) return false;
+
+    if (entered !== ADMIN_PIN) {
+        alert("관리자 PIN이 올바르지 않습니다.");
+        return false;
+    }
+
+    adminUnlocked = true;
+    return true;
+}
+
 
 
 /* 날짜 */
@@ -1329,6 +1350,7 @@ function addMenuByIndex(index) {
 }
 
 function openMenuManager() {
+    if (!requestAdminPin("메뉴 관리를 열려면 관리자 PIN을 입력해주세요.")) return;
     renderMenuManager();
     document.getElementById("menuModal").classList.add("show");
 }
@@ -2586,6 +2608,8 @@ function toggleDayDetail(index) {
 ========================= */
 
 function deleteDayRecord(date) {
+
+    if (!requestAdminPin("매출 기록을 삭제하려면 관리자 PIN을 입력해주세요.")) return;
 
     const db = getDatabase();
 
